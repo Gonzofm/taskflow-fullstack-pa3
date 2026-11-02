@@ -1,0 +1,282 @@
+{
+  "generatedAt": "2026-11-02T19:29:17.208Z",
+  "environment": "Aplicación local real; exclusivamente cuentas sintéticas académicas",
+  "observations": [
+    {
+      "name": "API conectada a MongoDB",
+      "method": "GET",
+      "route": "/api/health",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "status": "ok",
+          "database": "connected"
+        }
+      }
+    },
+    {
+      "name": "JWT ausente rechazado",
+      "method": "GET",
+      "route": "/api/tasks",
+      "status": 401,
+      "body": {
+        "success": false,
+        "message": "Debes iniciar sesión para continuar."
+      }
+    },
+    {
+      "name": "JWT inválido rechazado",
+      "method": "GET",
+      "route": "/api/tasks",
+      "authorization": "Bearer [omitido]",
+      "status": 401,
+      "body": {
+        "success": false,
+        "message": "La sesión no es válida. Inicia sesión nuevamente."
+      }
+    },
+    {
+      "name": "Login real cuenta QA",
+      "method": "POST",
+      "route": "/api/auth/login",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "user": {
+            "id": "6ae8e272dc2eadeca7227372",
+            "name": "Estudiante PA3",
+            "email": "estudiante.pa3.1793647126477@taskflow.test",
+            "createdAt": "2026-11-02T19:20:18.635Z",
+            "updatedAt": "2026-11-02T19:20:18.635Z"
+          },
+          "token": "[omitido]"
+        }
+      }
+    },
+    {
+      "name": "Cuenta QA lista exclusivamente sus tres tareas",
+      "method": "GET",
+      "route": "/api/tasks",
+      "authorization": "Bearer [omitido]",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "tasks": [
+            {
+              "id": "6ae8e3219a297ecdd562ea96",
+              "title": "Organizar la entrega académica",
+              "description": "",
+              "priority": "low",
+              "status": "pending",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:23:13.170Z",
+              "updatedAt": "2026-11-02T19:23:13.170Z"
+            },
+            {
+              "id": "6ae8e31e9a297ecdd562ea93",
+              "title": "Revisar README y evidencias",
+              "description": "Comprobar instalación, API REST y capturas antes de entregar el repositorio al docente.",
+              "priority": "medium",
+              "status": "pending",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:23:10.213Z",
+              "updatedAt": "2026-11-02T19:23:10.213Z"
+            },
+            {
+              "id": "6ae8e28e9a297ecdd562ea8c",
+              "title": "Demostración del PA3 preparada",
+              "description": "Demostrar registro, autenticación JWT y tareas privadas con persistencia en MongoDB.",
+              "priority": "high",
+              "status": "completed",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:20:46.550Z",
+              "updatedAt": "2026-11-02T19:20:49.669Z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Segunda cuenta sintética creada sólo para aislamiento",
+      "method": "POST",
+      "route": "/api/auth/register",
+      "status": 201,
+      "body": {
+        "success": true,
+        "data": {
+          "userId": "6ae8e46e9a297ecdd562eaad"
+        }
+      },
+      "token": "[omitido]"
+    },
+    {
+      "name": "Cuenta B no ve tareas de QA",
+      "method": "GET",
+      "route": "/api/tasks",
+      "authorization": "Bearer [omitido]",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "tasks": []
+        }
+      }
+    },
+    {
+      "name": "Cuenta B no puede GET una tarea ajena",
+      "method": "GET",
+      "route": "/api/tasks/6ae8e3219a297ecdd562ea96",
+      "authorization": "Bearer [omitido]",
+      "status": 404,
+      "body": {
+        "success": false,
+        "message": "No se encontró la tarea."
+      }
+    },
+    {
+      "name": "Cuenta B no puede PUT una tarea ajena",
+      "method": "PUT",
+      "route": "/api/tasks/6ae8e3219a297ecdd562ea96",
+      "authorization": "Bearer [omitido]",
+      "status": 404,
+      "body": {
+        "success": false,
+        "message": "No se encontró la tarea."
+      }
+    },
+    {
+      "name": "Cuenta B no puede DELETE una tarea ajena",
+      "method": "DELETE",
+      "route": "/api/tasks/6ae8e3219a297ecdd562ea96",
+      "authorization": "Bearer [omitido]",
+      "status": 404,
+      "body": {
+        "success": false,
+        "message": "No se encontró la tarea."
+      }
+    },
+    {
+      "name": "QA conserva sus tres tareas sin cambios tras intentos de B",
+      "method": "GET",
+      "route": "/api/tasks",
+      "authorization": "Bearer [omitido]",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "tasks": [
+            {
+              "id": "6ae8e3219a297ecdd562ea96",
+              "title": "Organizar la entrega académica",
+              "description": "",
+              "priority": "low",
+              "status": "pending",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:23:13.170Z",
+              "updatedAt": "2026-11-02T19:23:13.170Z"
+            },
+            {
+              "id": "6ae8e31e9a297ecdd562ea93",
+              "title": "Revisar README y evidencias",
+              "description": "Comprobar instalación, API REST y capturas antes de entregar el repositorio al docente.",
+              "priority": "medium",
+              "status": "pending",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:23:10.213Z",
+              "updatedAt": "2026-11-02T19:23:10.213Z"
+            },
+            {
+              "id": "6ae8e28e9a297ecdd562ea8c",
+              "title": "Demostración del PA3 preparada",
+              "description": "Demostrar registro, autenticación JWT y tareas privadas con persistencia en MongoDB.",
+              "priority": "high",
+              "status": "completed",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:20:46.550Z",
+              "updatedAt": "2026-11-02T19:20:49.669Z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "API reconectada después del reinicio de MongoDB",
+      "method": "GET",
+      "route": "/api/health",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "status": "ok",
+          "database": "connected"
+        }
+      }
+    },
+    {
+      "name": "Login sigue funcionando después del reinicio",
+      "method": "POST",
+      "route": "/api/auth/login",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "user": {
+            "id": "6ae8e272dc2eadeca7227372",
+            "name": "Estudiante PA3",
+            "email": "estudiante.pa3.1793647126477@taskflow.test",
+            "createdAt": "2026-11-02T19:20:18.635Z",
+            "updatedAt": "2026-11-02T19:20:18.635Z"
+          },
+          "token": "[omitido]"
+        }
+      }
+    },
+    {
+      "name": "API recupera las tres tareas guardadas, título editado y tarea completada",
+      "method": "GET",
+      "route": "/api/tasks",
+      "authorization": "Bearer [omitido]",
+      "status": 200,
+      "body": {
+        "success": true,
+        "data": {
+          "tasks": [
+            {
+              "id": "6ae8e3219a297ecdd562ea96",
+              "title": "Organizar la entrega académica",
+              "description": "",
+              "priority": "low",
+              "status": "pending",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:23:13.170Z",
+              "updatedAt": "2026-11-02T19:23:13.170Z"
+            },
+            {
+              "id": "6ae8e31e9a297ecdd562ea93",
+              "title": "Revisar README y evidencias",
+              "description": "Comprobar instalación, API REST y capturas antes de entregar el repositorio al docente.",
+              "priority": "medium",
+              "status": "pending",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:23:10.213Z",
+              "updatedAt": "2026-11-02T19:23:10.213Z"
+            },
+            {
+              "id": "6ae8e28e9a297ecdd562ea8c",
+              "title": "Demostración del PA3 preparada",
+              "description": "Demostrar registro, autenticación JWT y tareas privadas con persistencia en MongoDB.",
+              "priority": "high",
+              "status": "completed",
+              "user": "6ae8e272dc2eadeca7227372",
+              "createdAt": "2026-11-02T19:20:46.550Z",
+              "updatedAt": "2026-11-02T19:20:49.669Z"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

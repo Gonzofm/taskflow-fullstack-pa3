@@ -1,0 +1,24 @@
+Comando: npm run build
+Fecha UTC: 2026-11-02T19:20:47.285Z
+Node: v22.22.2
+
+
+> taskflow-pa3@1.0.0 build
+> npm run build --workspaces
+
+
+> @taskflow/client@1.0.0 build
+> tsc -b && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1603 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.65 kB │ gzip:  0.40 kB
+dist/assets/index-DV2fK029.css   57.10 kB │ gzip: 11.83 kB
+dist/assets/index-C5n9J1b5.js   299.75 kB │ gzip: 94.63 kB
+✓ built in 5.83s
+
+> @taskflow/server@1.0.0 build
+> tsc

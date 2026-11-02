@@ -1,0 +1,15 @@
+Comando: npm run typecheck
+Fecha UTC: 2026-11-02T19:20:47.285Z
+Node: v22.22.2
+
+
+> taskflow-pa3@1.0.0 typecheck
+> npm run typecheck --workspaces
+
+
+> @taskflow/client@1.0.0 typecheck
+> tsc -b --pretty false
+
+
+> @taskflow/server@1.0.0 typecheck
+> tsc --noEmit

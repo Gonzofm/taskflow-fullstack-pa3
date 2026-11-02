@@ -1,0 +1,116 @@
+{
+  "startedAt": "2026-11-02T19:28:46.365Z",
+  "finishedAt": "2026-11-02T19:29:17.208Z",
+  "environment": "TaskFlow local académico real",
+  "storage": {
+    "database": "taskflow",
+    "port": 27017,
+    "engine": "WiredTiger",
+    "directory": ".local/mongodb",
+    "version": "8.0.17"
+  },
+  "restart": {
+    "method": "admin.shutdown y npm run db:start sobre el mismo directorio",
+    "beforePid": 23364,
+    "afterPid": 28284,
+    "oldProcessExited": true,
+    "newProcessConfirmed": true,
+    "shutdownCompletedAt": "2026-11-02T19:28:46.475Z"
+  },
+  "verification": {
+    "scope": "Sólo la cuenta QA registrada desde la UI y sus tres tareas",
+    "beforeCount": 3,
+    "afterCount": 3,
+    "documentsExactlyEqual": true,
+    "editedTitlePreserved": true,
+    "completedTaskPreserved": true,
+    "apiLoginStatus": 200,
+    "apiListStatus": 200,
+    "apiHealthStatus": 200,
+    "tasksNotModifiedByThisCheck": true
+  },
+  "before": {
+    "database": "taskflow",
+    "user": {
+      "_id": "6ae8e272dc2eadeca7227372",
+      "name": "Estudiante PA3",
+      "email": "estudiante.pa3.1793647126477@taskflow.test",
+      "createdAt": "2026-11-02T19:20:18.635Z",
+      "updatedAt": "2026-11-02T19:20:18.635Z"
+    },
+    "tasks": [
+      {
+        "_id": "6ae8e28e9a297ecdd562ea8c",
+        "title": "Demostración del PA3 preparada",
+        "description": "Demostrar registro, autenticación JWT y tareas privadas con persistencia en MongoDB.",
+        "priority": "high",
+        "status": "completed",
+        "user": "6ae8e272dc2eadeca7227372",
+        "createdAt": "2026-11-02T19:20:46.550Z",
+        "updatedAt": "2026-11-02T19:20:49.669Z"
+      },
+      {
+        "_id": "6ae8e31e9a297ecdd562ea93",
+        "title": "Revisar README y evidencias",
+        "description": "Comprobar instalación, API REST y capturas antes de entregar el repositorio al docente.",
+        "priority": "medium",
+        "status": "pending",
+        "user": "6ae8e272dc2eadeca7227372",
+        "createdAt": "2026-11-02T19:23:10.213Z",
+        "updatedAt": "2026-11-02T19:23:10.213Z"
+      },
+      {
+        "_id": "6ae8e3219a297ecdd562ea96",
+        "title": "Organizar la entrega académica",
+        "description": "",
+        "priority": "low",
+        "status": "pending",
+        "user": "6ae8e272dc2eadeca7227372",
+        "createdAt": "2026-11-02T19:23:13.170Z",
+        "updatedAt": "2026-11-02T19:23:13.170Z"
+      }
+    ]
+  },
+  "after": {
+    "database": "taskflow",
+    "user": {
+      "_id": "6ae8e272dc2eadeca7227372",
+      "name": "Estudiante PA3",
+      "email": "estudiante.pa3.1793647126477@taskflow.test",
+      "createdAt": "2026-11-02T19:20:18.635Z",
+      "updatedAt": "2026-11-02T19:20:18.635Z"
+    },
+    "tasks": [
+      {
+        "_id": "6ae8e28e9a297ecdd562ea8c",
+        "title": "Demostración del PA3 preparada",
+        "description": "Demostrar registro, autenticación JWT y tareas privadas con persistencia en MongoDB.",
+        "priority": "high",
+        "status": "completed",
+        "user": "6ae8e272dc2eadeca7227372",
+        "createdAt": "2026-11-02T19:20:46.550Z",
+        "updatedAt": "2026-11-02T19:20:49.669Z"
+      },
+      {
+        "_id": "6ae8e31e9a297ecdd562ea93",
+        "title": "Revisar README y evidencias",
+        "description": "Comprobar instalación, API REST y capturas antes de entregar el repositorio al docente.",
+        "priority": "medium",
+        "status": "pending",
+        "user": "6ae8e272dc2eadeca7227372",
+        "createdAt": "2026-11-02T19:23:10.213Z",
+        "updatedAt": "2026-11-02T19:23:10.213Z"
+      },
+      {
+        "_id": "6ae8e3219a297ecdd562ea96",
+        "title": "Organizar la entrega académica",
+        "description": "",
+        "priority": "low",
+        "status": "pending",
+        "user": "6ae8e272dc2eadeca7227372",
+        "createdAt": "2026-11-02T19:23:13.170Z",
+        "updatedAt": "2026-11-02T19:23:13.170Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-11-02T19:30:54.177Z",
+  "environment": "TaskFlow local, cuenta sintética Estudiante PA3",
+  "method": "Navegación y formularios reales mediante CUA",
+  "checks": [
+    {
+      "name": "Registro por formulario",
+      "result": "PASS"
+    },
+    {
+      "name": "Crear, listar, editar y completar tarea",
+      "result": "PASS"
+    },
+    {
+      "name": "Confirmación de borrado y cancelación conservan tarea",
+      "result": "PASS"
+    },
+    {
+      "name": "Botón final Eliminar tarea",
+      "result": "PASS",
+      "observation": "Tarea temporal desaparece; contador4→3; notificación de éxito"
+    },
+    {
+      "name": "Recarga después de reiniciar MongoDB27017",
+      "result": "PASS",
+      "observation": "Tres tareas recuperadas incluyendo edición y completada"
+    },
+    {
+      "name": "Logout y acceso directo al dashboard",
+      "result": "PASS",
+      "observation": "Redirige a login"
+    },
+    {
+      "name": "Login con credenciales de la cuenta sintética",
+      "result": "PASS",
+      "observation": "Recupera tres tareas"
+    }
+  ],
+  "responsive": [
+    {
+      "width": 390,
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "inputFont": "16px",
+      "result": "PASS"
+    },
+    {
+      "width": 320,
+      "clientWidth": 305,
+      "scrollWidth": 305,
+      "result": "PASS"
+    }
+  ],
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "scope": "Flujo real de registro, CRUD y recarga; inspección previa a pruebas intencionales de rechazo401"
+  },
+  "relatedEvidence": [
+    "06-confirmacion-eliminar.jpg",
+    "06b-tarea-eliminada.jpg",
+    "14-persistencia-aplicacion.json"
+  ],
+  "privacy": "No se incluyen contraseñas ni tokens; identidad y correo de prueba ficticios."
+}

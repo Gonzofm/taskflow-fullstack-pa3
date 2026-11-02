@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-11-02T19:35:01.086Z",
+  "scope": "Contenido exacto del índice Git antes de publicar",
+  "filesReviewed": 77,
+  "result": "PASS",
+  "secretFindings": [],
+  "exclusionsVerified": [
+    ".env",
+    ".local",
+    "node_modules",
+    "dist",
+    "coverage",
+    "*.tsbuildinfo"
+  ],
+  "checks": [
+    "Comparación con secreto JWT real y contraseña QA, sin revelarlos",
+    "Tokens GitHub/JWT y claves privadas",
+    "URIs MongoDB con credenciales",
+    "Rutas personales y nombres de archivos excluidos"
+  ],
+  "testData": "Las cuentas .test y los ejemplos documentados son ficticios. Las contraseñas reales y los tokens no se publican.",
+  "limitations": "Escaneo de patrones y revisión manual complementaria; no constituye una garantía universal de ausencia de vulnerabilidades."
+}

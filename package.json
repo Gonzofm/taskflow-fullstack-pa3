@@ -1,0 +1,31 @@
+{
+  "name": "taskflow-pa3",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TaskFlow — Producto Académico 3 Full-Stack",
+  "type": "module",
+  "workspaces": ["client", "server"],
+  "engines": { "node": ">=22.12.0", "npm": ">=10" },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "db:start": "node scripts/mongodb.mjs",
+    "db:inspect": "node scripts/inspect-db.mjs",
+    "dev": "concurrently --kill-others -n API,WEB -c cyan,magenta \"npm run dev -w @taskflow/server\" \"npm run dev -w @taskflow/client\"",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm run test -w @taskflow/server",
+    "verify": "node scripts/verify.mjs",
+    "start": "npm run start -w @taskflow/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.2.3",
+    "mongodb-memory-server-core": "^10.3.0"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "downloadDir": ".local/mongodb-binaries",
+      "version": "8.0.17"
+    }
+  }
+}
