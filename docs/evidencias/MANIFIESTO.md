@@ -1,6 +1,6 @@
 # Manifiesto de evidencias obtenidas
 
-Fecha: **2 de noviembre de 2026**, America/Lima. Entorno local académico con Node.js **22.22.2**, MongoDB **8.0.17**, API en `localhost:4000` y cliente en `localhost:5173`. La última verificación automatizada comenzó en `2026-11-02T19:20:47.285Z` y aprobó TypeScript, ambos builds y las 18 pruebas.
+Fecha: **2 de noviembre de 2026**, America/Lima. Entorno local académico con Node.js **22.22.2**, MongoDB **8.0.17**, API en `localhost:4000` y cliente en `localhost:5173`. La última verificación automatizada comenzó en `2026-11-02T19:53:58.552Z` y aprobó TypeScript, ambos builds y las 18 pruebas.
 
 Las capturas de interfaz se obtuvieron mediante automatización del navegador sobre la aplicación real. Los datos de demostración se crearon mediante formularios reales; no son datos precargados del producto. El registro público de HTTP omite tokens, y la consulta de MongoDB excluye hashes de contraseñas.
 
@@ -14,12 +14,15 @@ Las capturas de interfaz se obtuvieron mediante automatización del navegador so
 | [06-confirmacion-eliminar.jpg](06-confirmacion-eliminar.jpg) | Captura del navegador | Modal real abierto para una tarea temporal; cancelar la conservó |
 | [06b-tarea-eliminada.jpg](06b-tarea-eliminada.jpg) | Captura del navegador después de confirmar Eliminar tarea | Tarea descartable eliminada, listado actualizado, contador de 4 a 3 y mensaje de éxito |
 | [07-mongodb-documentos.json](07-mongodb-documentos.json) | Consulta directa mediante script de inspección | Documentos reales de una cuenta de prueba y sus tareas; campo `password` excluido |
-| [08-api-http.json](08-api-http.json) | Peticiones HTTP al backend activo | Salud `200`, protegido `401`, login `200`, eliminación `200`, consulta posterior `404`, listado `200`; token omitido |
+| [08-api-http.json](08-api-http.json) | Peticiones HTTP al backend activo | Login, listado y salud `200`; JWT ausente/inválido `401`; cuenta B sin tareas y GET/PUT/DELETE de tareas ajenas `404`; reconexión tras reinicio; token omitido |
 | [08-api-salud.jpg](08-api-salud.jpg) | Captura de respuesta real en navegador | API y conexión MongoDB disponibles |
 | [09-protegido-sin-token.jpg](09-protegido-sin-token.jpg) | Captura de respuesta real en navegador | Ruta protegida sin token, error de acceso |
 | [11-validaciones.jpg](11-validaciones.jpg) | Captura del navegador | Validación real del formulario de registro |
 | [12-dashboard-movil.jpg](12-dashboard-movil.jpg) | Captura del navegador a 320 px | Distribución responsive; sin desbordamiento |
 | [13-verificacion-navegador.json](13-verificacion-navegador.json) | Registro de observaciones del navegador CUA | Flujos UI, logout, protección privada, login, tamaños 390/320 px y alcance de consola |
+| [14-persistencia-aplicacion.json](14-persistencia-aplicacion.json) | Reinicio limpio de MongoDB usado por la aplicación, en el puerto 27017 | PID distinto y tres tareas con todos sus campos idénticos; título editado y estado completado conservados; API recuperada |
+| [15-seguridad-publicacion.json](15-seguridad-publicacion.json) | Revisión exacta del índice Git antes de publicar | Sin coincidencias de secretos reales ni patrones comprobados; fecha, cantidad de archivos, exclusiones y límites documentados |
+| [16-publicacion-github.json](16-publicacion-github.json) | Tres GET HTTPS públicos sin token para repositorio, rama y árbol | Respuestas `200`; publicación inicial en `main`; 77 archivos con hashes idénticos a Git local y sin archivos excluidos |
 | [typecheck.txt](typecheck.txt) | Salida automática de `npm run verify` | TypeScript cliente y servidor: código 0 |
 | [build.txt](build.txt) | Salida automática de `npm run verify` | Vite y compilación backend: código 0 |
 | [build-client-final.txt](build-client-final.txt) | Build adicional después del ajuste móvil y del texto singular de filtros | TypeScript y Vite finales: código 0 |
@@ -41,6 +44,6 @@ La repetición de la suite encontró y permitió corregir la durabilidad de la �
 ## Pendientes identificados
 
 - `07-mongodb-documentos.jpg`: captura de MongoDB Compass, que no está instalado. Existe JSON real de la base y una prueba real de reinicio/persistencia.
-- `10-github.jpg`: el [repositorio público](https://github.com/Gonzofm/taskflow-fullstack-pa3) ya fue creado y su visibilidad comprobada; el envío inicial del código está en preparación. La captura se obtendrá después de verificar el push y los archivos remotos.
+- `10-github.jpg`: captura complementaria del [repositorio público con el código publicado](https://github.com/Gonzofm/taskflow-fullstack-pa3), aún no incorporada. La publicación pública ya está comprobada de forma anónima en [16-publicacion-github.json](16-publicacion-github.json); la guía explica cómo obtener una captura auténtica, sin sustituirla por una imagen simulada.
 
 Para reproducir y completar las evidencias sigue [README.md](README.md). La evaluación y el alcance de las pruebas figuran en [AUDITORIA.md](../AUDITORIA.md).

@@ -2,7 +2,7 @@
 
 Esta carpeta contiene capturas reales de la aplicación ejecutándose, documentos consultados en MongoDB, resultados HTTP saneados y logs de verificación. El inventario exacto y sus límites están en [MANIFIESTO.md](MANIFIESTO.md). Fecha de obtención: **2 de noviembre de 2026**, America/Lima.
 
-**Verificación automatizada renovada: 18/18 pruebas aprobadas, TypeScript y builds correctos**, con inicio `2026-11-02T19:20:47.285Z`. Consulta [verificacion.json](verificacion.json), [typecheck.txt](typecheck.txt), [build.txt](build.txt) y [test.txt](test.txt). Para regenerarlos, ejecuta `npm run verify` desde la raíz. La última actualización de una tarea se recuperó después de reiniciar el proceso MongoDB; las escrituras se confirman en el journal.
+**Verificación automatizada renovada: 18/18 pruebas aprobadas, TypeScript y builds correctos**, con inicio `2026-11-02T19:53:58.552Z`. Consulta [verificacion.json](verificacion.json), [typecheck.txt](typecheck.txt), [build.txt](build.txt) y [test.txt](test.txt). Para regenerarlos, ejecuta `npm run verify` desde la raíz. La última actualización de una tarea se recuperó después de reiniciar el proceso MongoDB; las escrituras se confirman en el journal.
 
 ## Diez evidencias solicitadas
 
@@ -15,11 +15,21 @@ Esta carpeta contiene capturas reales de la aplicación ejecutándose, documento
 | 5 | [05-tareas-guardadas.jpg](05-tareas-guardadas.jpg) | Tres tareas creadas mediante UI y recuperadas tras recargar | Listado real, prioridades, estados e indicadores |
 | 6 | [06-confirmacion-eliminar.jpg](06-confirmacion-eliminar.jpg), [06b-tarea-eliminada.jpg](06b-tarea-eliminada.jpg) y [08-api-http.json](08-api-http.json) | Cancelar conservó una tarea temporal; confirmar Eliminar tarea la eliminó, actualizó el listado y redujo el contador 4→3; recarga conservó las 3 restantes | Confirmación y eliminación verificadas de extremo a extremo en UI, además de la API |
 | 7 | [07-mongodb-documentos.json](07-mongodb-documentos.json) | Inspección directa de la base `taskflow`, sin hashes. **Captura Compass pendiente**: no está instalado | Documentos reales de una cuenta académica y sus tareas, relación ObjectId |
-| 8 | [08-api-http.json](08-api-http.json) y [08-api-salud.jpg](08-api-salud.jpg) | Solicitudes reales al servidor ejecutándose; JWT omitido del registro entregable | API conectada, login, listado y eliminación con códigos HTTP |
+| 8 | [08-api-http.json](08-api-http.json) y [08-api-salud.jpg](08-api-salud.jpg) | Solicitudes reales al servidor ejecutándose; JWT omitido del registro entregable | API conectada, login/listado, JWT rechazados y GET/PUT/DELETE de tareas ajenas rechazados; recuperación tras reiniciar MongoDB |
 | 9 | [09-protegido-sin-token.jpg](09-protegido-sin-token.jpg) | GET `/api/tasks` sin Authorization | Rechazo `401` y error JSON controlado |
-| 10 | [Repositorio público creado](https://github.com/Gonzofm/taskflow-fullstack-pa3); captura `10-github.jpg` pendiente | Visibilidad pública comprobada; envío inicial del código en preparación. Capturar después de confirmar el push y los archivos remotos | Repositorio público; el contenido se verificará después del envío |
+| 10 | [Repositorio público con código publicado](https://github.com/Gonzofm/taskflow-fullstack-pa3) y [16-publicacion-github.json](16-publicacion-github.json); captura `10-github.jpg` complementaria | Tres GET anónimos devuelven `200`; 77 archivos de la instantánea inicial y árbol Git coinciden con el contenido local revisado, rama `main`, sin actualización forzada | Código fuente y documentación disponibles públicamente sin iniciar sesión |
 
 Captura adicional: [12-dashboard-movil.jpg](12-dashboard-movil.jpg), navegador con viewport móvil de 320 px. Se comprobaron 390 y 320 px sin desbordamiento horizontal. El registro [13-verificacion-navegador.json](13-verificacion-navegador.json) documenta los flujos observados, logout, acceso privado y login. La consola no mostró errores ni advertencias antes de la prueba deliberada de credenciales incorrectas; el `401` posterior es esperado.
+
+La [comparación de persistencia de la aplicación](14-persistencia-aplicacion.json) demuestra un nuevo proceso MongoDB en el mismo puerto y disco con las tres tareas intactas. La [auditoría previa a publicar](15-seguridad-publicacion.json) registra las exclusiones, el escaneo del índice Git y su cantidad de archivos, sin revelar credenciales.
+
+## Captura auténtica de GitHub
+
+La publicación del código ya está verificada en [16-publicacion-github.json](16-publicacion-github.json). Para añadir su captura visual complementaria:
+
+1. Abre [Gonzofm/taskflow-fullstack-pa3](https://github.com/Gonzofm/taskflow-fullstack-pa3) en una ventana sin sesión o de incógnito.
+2. Comprueba la visibilidad **Public**, la rama **main** y las carpetas **client**, **server** y **docs**; desplázate si hace falta para incluir el README.
+3. Captura la página real con su URL visible, sin diálogos de credenciales, y guarda `10-github.jpg` en esta carpeta. No presentes una recreación o un mockup como captura del repositorio.
 
 ## Completar la captura MongoDB
 

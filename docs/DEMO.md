@@ -17,7 +17,7 @@ Con las dependencias y el entorno configurados, ejecuta `npm run db:start` en un
 | 2:25–2:45 | Mostrar documentos MongoDB y el caso de persistencia aprobado | «User y Task se relacionan mediante ObjectId. La escritura se confirma en el journal. La prueba reinicia un proceso mongod real sobre los mismos archivos WiredTiger y recupera la última actualización.» |
 | 2:45–3:00 | Mostrar estructura, README y cerrar sesión | «Frontend y backend son workspaces separados. TypeScript, ambos builds y las 18 pruebas pasaron. El README explica cómo reproducirlo.» |
 
-El [repositorio de GitHub](https://github.com/Gonzofm/taskflow-fullstack-pa3) ya fue creado con visibilidad pública; el envío inicial del código está en preparación. Para la exposición, confirma primero que el README y las carpetas estén visibles. La captura de Compass está pendiente; hasta obtenerla, presenta el JSON de inspección como evidencia de consulta directa y explica su procedencia. El [manifiesto](evidencias/MANIFIESTO.md) contiene las capturas reales de la confirmación y del resultado de eliminación.
+El código está publicado en el [repositorio público de GitHub](https://github.com/Gonzofm/taskflow-fullstack-pa3), rama `main`. Para la exposición, abre su README y las carpetas `client`, `server` y `docs`; el [registro de publicación](evidencias/16-publicacion-github.json) demuestra acceso anónimo mediante tres GET con respuesta `200`. La captura de Compass es un complemento manual; hasta obtenerla, presenta el JSON de inspección y la comparación antes/después del reinicio como evidencias de consultas reales. El [manifiesto](evidencias/MANIFIESTO.md) contiene las capturas reales de la confirmación y del resultado de eliminación.
 
 ## Si el docente pregunta
 
@@ -26,4 +26,4 @@ El [repositorio de GitHub](https://github.com/Gonzofm/taskflow-fullstack-pa3) ya
 - **¿Cómo se protegen tareas ajenas?** Cada consulta individual combina `_id` y `user`. No basta con ocultar botones en React.
 - **¿La base de pruebas es simulada?** No. El lanzador ejecuta un binario MongoDB real. La aplicación usa una instancia persistente; las pruebas utilizan otra base aislada y temporal.
 - **¿Por qué se configura el journal?** Para confirmar una escritura cuando queda registrada de forma durable. Se corrigió una posible pérdida del último cambio al terminar bruscamente el proceso en Windows y se repitió la prueba de reinicio sin debilitarla.
-- **¿Qué falta para la entrega?** Completar captura Compass y confirmar el push y los archivos del repositorio público creado. Esos pendientes se declaran en la auditoría y se retirarán cuando exista evidencia real.
+- **¿Qué falta para la entrega?** Compartir la URL pública con el docente y, si solicita la vista de Compass, completar esa captura auténtica siguiendo la guía. El código, los resultados de pruebas y las evidencias de funcionamiento ya están preparados.

@@ -2,7 +2,7 @@
 
 Aplicación web full-stack para organizar tareas personales mediante cuentas independientes. React consume una API REST de Express; Mongoose almacena usuarios y tareas en **MongoDB real**. La autorización se aplica en el servidor a cada operación.
 
-**Verificado el 2 de noviembre de 2026:** dependencias instaladas, TypeScript y builds correctos, **18/18 pruebas de integración aprobadas** con MongoDB real 8.0.17, incluido reinicio de `mongod` conservando la última actualización. La ejecución de referencia está fechada `2026-11-02T19:20:47.285Z` en el [reporte](docs/evidencias/verificacion.json). También se ejecutaron los flujos principales en el navegador y se guardaron capturas reales. Consulta la [auditoría final](docs/AUDITORIA.md) y el [manifiesto de evidencias](docs/evidencias/MANIFIESTO.md). El [repositorio público](https://github.com/Gonzofm/taskflow-fullstack-pa3) ya fue creado y su visibilidad comprobada; el envío inicial del código está en preparación. La captura de MongoDB Compass se explica en la guía de evidencias.
+**Verificado el 2 de noviembre de 2026:** dependencias instaladas, TypeScript y builds correctos, **18/18 pruebas de integración aprobadas** con MongoDB real 8.0.17, incluido reinicio de `mongod` conservando la última actualización. La ejecución de referencia está fechada `2026-11-02T19:53:58.552Z` en el [reporte](docs/evidencias/verificacion.json). También se ejecutaron los flujos principales en el navegador y se guardaron capturas reales. El código ya está publicado en el **[repositorio público de TaskFlow](https://github.com/Gonzofm/taskflow-fullstack-pa3)**. Consulta la [auditoría final](docs/AUDITORIA.md) y el [manifiesto de evidencias](docs/evidencias/MANIFIESTO.md). La guía explica cómo obtener una captura auténtica complementaria de MongoDB Compass.
 
 ## 1. Objetivo académico
 
@@ -97,7 +97,7 @@ proyecto-fullstack/
 
 ## 7. Instalación
 
-Abre una terminal en `proyecto-fullstack`:
+Abre una terminal en la raíz del repositorio, donde está `package.json`:
 
 ```powershell
 npm install
@@ -338,6 +338,8 @@ npm run db:inspect
 
 Este comando es de lectura y utiliza `server/.env`. La evidencia de la ejecución realizada está en [07-mongodb-documentos.json](docs/evidencias/07-mongodb-documentos.json).
 
+Además de la suite aislada, se reinició la instancia persistente de la aplicación en el puerto 27017 sobre el mismo directorio de datos. Las tres tareas de la cuenta académica conservaron todos sus campos, incluido el título editado y el estado completado; login, listado y salud respondieron `200` tras la reconexión. La comparación real antes/después está en [14-persistencia-aplicacion.json](docs/evidencias/14-persistencia-aplicacion.json).
+
 Prueba manual recomendada:
 
 1. Registra las cuentas A y B.
@@ -390,13 +392,17 @@ Para preparar una exposición breve, sigue el [guion de demostración de tres mi
 
 Incluye código fuente, lockfile, `.env.example`, README, auditoría y evidencias reales. No entregues `node_modules`, builds, archivos `.env`, tokens, URI privada ni los datos de `.local/`. Comprueba `git status --short` y revisa los archivos que vas a añadir antes de crear un commit. Si una credencial se publica accidentalmente, elimínala del material y rótala; borrarla del último archivo no la elimina del historial.
 
+La [revisión previa a la publicación](docs/evidencias/15-seguridad-publicacion.json) examinó el contenido del índice Git, sin coincidencias con el secreto JWT real, la contraseña de prueba privada ni los patrones de tokens o claves privadas comprobados. El informe registra fecha, cantidad de archivos, alcance y limitaciones; los ejemplos de este README son ficticios y los secretos locales permanecen excluidos.
+
 ## 20. Repositorio público de GitHub
 
 Repositorio: **[Gonzofm/taskflow-fullstack-pa3](https://github.com/Gonzofm/taskflow-fullstack-pa3)**.
 
-El repositorio público fue creado y su visibilidad comprobada. **Estado de esta revisión: envío inicial del código en preparación**; crear el repositorio no equivale a confirmar que los archivos ya estén publicados. El cierre de publicación se documentará después del push y de revisar los archivos remotos.
+**Código publicado en la rama `main`.** La publicación inicial se verificó en el commit [`aba297b`](https://github.com/Gonzofm/taskflow-fullstack-pa3/commit/aba297bd8bfdabebb8d24d71ded82749207318c0): los 77 archivos y su árbol Git coincidieron exactamente con el contenido local revisado. El envío se completó mediante la API oficial de GitHub y actualizaciones de referencia sin `force`, debido a problemas de conexión del transporte Git HTTPS en el entorno de verificación. La rama `main` contiene la versión entregable y sus actualizaciones de documentación.
 
-Una vez completado el envío del código, se podrá clonar e instalar sin depender de las rutas del equipo de desarrollo:
+El [registro de publicación pública](docs/evidencias/16-publicacion-github.json), obtenido en `2026-11-02T20:09:55.568Z`, confirma tres respuestas `200` sin autenticación para repositorio, rama y árbol de archivos. Los hashes de los 77 archivos de esa instantánea inicial coinciden con Git local y no aparecen los archivos excluidos. Los commits posteriores de documentación pueden ampliar ese inventario; el registro conserva la instantánea original.
+
+Puedes clonar e instalar el proyecto sin depender de las rutas del equipo de desarrollo:
 
 ```powershell
 git clone https://github.com/Gonzofm/taskflow-fullstack-pa3.git
