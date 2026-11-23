@@ -35,14 +35,16 @@ function encode(value) {
 }
 let connection;
 try {
-  connection = await mysql.createConnection({ host: environment.DB_HOST, port: 3306, user: environment.DB_USER, password, database: environment.DB_NAME, ssl: { rejectUnauthorized: true }, connectTimeout: 10000 });
-  await connection.execute('SELECT 1 AS connected');
   const target = new URL('./server/.env.pa4', import.meta.url);
   await mkdir(new URL('./server/', import.meta.url), { recursive: true });
   await writeFile(target, Object.entries(environment).map(([name, value]) => `${name}=${encode(value)}`).join('\n') + '\n', { flag: 'wx', mode: 0o600 });
-  console.log('Conexión SQL TLS comprobada. Configuración privada de producción guardada.');
-} catch {
-  console.error('No se pudo configurar producción. Comprueba el acceso MySQL y que no exista ya server/.env.pa4.');
+  console.log('Configuración privada guardada. Comprobando conexión SQL.');
+  connection = await mysql.createConnection({ host: environment.DB_HOST, port: 3306, user: environment.DB_USER, password, database: environment.DB_NAME, ssl: { rejectUnauthorized: true }, connectTimeout: 10000 });
+  await connection.execute('SELECT 1 AS connected');
+  console.log('Conexión SQL TLS comprobada.');
+} catch (error) {
+  const code = error && typeof error === 'object' && 'code' in error ? String(error.code) : 'CONFIGURATION_ERROR';
+  console.error('No se pudo completar la comprobación de producción. Código:', code);
   process.exitCode = 1;
 } finally {
   await connection?.end();
