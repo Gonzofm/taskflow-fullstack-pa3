@@ -1,0 +1,185 @@
+{
+  "generatedAt": "2026-11-23T23:33:21.206Z",
+  "apiBase": "https://taskflow4.alwaysdata.net/api",
+  "frontend": "https://taskflow-pa4-gonzofm.netlify.app",
+  "result": "PASS",
+  "engine": "mysql",
+  "records": {
+    "integrantes": 6,
+    "categorias": 3,
+    "plantillas": 12
+  },
+  "relations": [
+    {
+      "category": 1,
+      "templates": 4
+    },
+    {
+      "category": 2,
+      "templates": 4
+    },
+    {
+      "category": 3,
+      "templates": 4
+    }
+  ],
+  "api": [
+    {
+      "path": "/health",
+      "status": 200
+    },
+    {
+      "path": "/integrantes",
+      "status": 200
+    },
+    {
+      "path": "/categorias",
+      "status": 200
+    },
+    {
+      "path": "/plantillas",
+      "status": 200
+    },
+    {
+      "path": "/plantillas/categoria/1",
+      "status": 200
+    },
+    {
+      "path": "/plantillas/categoria/2",
+      "status": 200
+    },
+    {
+      "path": "/plantillas/categoria/3",
+      "status": 200
+    },
+    {
+      "path": "/plantillas/1",
+      "status": 200
+    },
+    {
+      "path": "/plantillas/no-valido",
+      "status": 400
+    },
+    {
+      "path": "/plantillas/2147483647",
+      "status": 404
+    },
+    {
+      "path": "/auth/me",
+      "status": 401
+    }
+  ],
+  "images": [
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/team/ana.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/team/diego.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/team/lucia.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/team/marco.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/team/sofia.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/team/andres.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/categories/organization.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/categories/work.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/categories/study.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/plan-semanal.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/habitos.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/metas-personales.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/agenda-diaria.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/proyecto.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/prioridades.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/reuniones.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/objetivos-equipo.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/plan-estudio.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/lecturas.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/repasos.svg",
+      "status": 200
+    },
+    {
+      "url": "https://taskflow4.alwaysdata.net/images/templates/entregas.svg",
+      "status": 200
+    }
+  ],
+  "frontendRoutes": [
+    {
+      "route": "/",
+      "status": 200,
+      "note": "HTML SPA; el render de React se comprueba en navegador."
+    },
+    {
+      "route": "/equipo",
+      "status": 200,
+      "note": "HTML SPA; el render de React se comprueba en navegador."
+    },
+    {
+      "route": "/plantillas",
+      "status": 200,
+      "note": "HTML SPA; el render de React se comprueba en navegador."
+    },
+    {
+      "route": "/plantillas/1",
+      "status": 200,
+      "note": "HTML SPA; el render de React se comprueba en navegador."
+    },
+    {
+      "route": "/ruta-inexistente-pa4",
+      "status": 200,
+      "note": "HTML SPA; el render de React se comprueba en navegador."
+    }
+  ]
+}

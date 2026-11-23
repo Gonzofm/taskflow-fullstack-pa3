@@ -30,6 +30,10 @@ Las páginas Nuestro equipo y Plantillas son públicas. El registro, inicio de s
 | `database/seed.sql` | Inserta seis integrantes, tres categorías y doce plantillas de demostración |
 | `database/checks.sql` | Comprueba cantidades, relación e imágenes registradas |
 | `scripts/sql.mjs` | Importa o inspecciona SQL usando la conexión configurada |
+| `deployment/alwaysdata/package.json` | Dependencias y comandos del backend que se publica |
+| `deployment/alwaysdata/configure.mjs` | Comprueba SQL con TLS y crea el entorno privado de producción |
+| `deployment/alwaysdata/import-sql.mjs` | Importa el esquema y los datos en la base configurada del hosting |
+| `scripts/build-alwaysdata.mjs` | Compila los módulos SQL y copia las imágenes al directorio de despliegue |
 | `netlify.toml` | Build del frontend y reescritura para rutas de React |
 
 La organización sigue las responsabilidades mostradas en S06, diapositiva 17. No se dispone de los proyectos originales de empleados y tienda, por lo que debe compararse con esos archivos del docente si están disponibles. Las referencias completas están en [REQUISITOS_PA4.md](REQUISITOS_PA4.md).
@@ -224,11 +228,11 @@ La relación maestro-detalle usa `categorias.id` y `plantillas.categoria_id`. Un
 
 ### 23. ¿Qué partes del backend cambian al publicar en AlwaysData?
 
-**Respuesta.** Configuro el host y puerto del proceso, la conexión a la base de AlwaysData, el origen HTTPS de Netlify y la URL HTTPS de la API. Compilo TypeScript y ejecuto la entrada PA4. Las credenciales se configuran en el entorno del servidor.
+**Respuesta.** Publico el backend SQL con su paquete independiente. AlwaysData asigna IP y puerto; la entrada los toma del entorno. Configuro la base con TLS, la URL pública y el origen de Netlify. El build copia los módulos y las imágenes necesarias.
 
-**Archivo y función.** `server/src/pa4/index.ts`, `start`; `server/src/pa4/config/env.ts`, `loadSqlConfig`; `server/package.json`, scripts `build` y `start`.
+**Archivo y función.** `server/src/pa4/index.ts`, `start`; `scripts/build-alwaysdata.mjs`; `deployment/alwaysdata/package.json`, scripts `build` y `start`.
 
-**Comprende.** `HOST`, `PORT`, variables `DB_*`, `CLIENT_ORIGIN` y `API_PUBLIC_URL`.
+**Comprende.** `HOST: process.env.HOST ?? process.env.IP`, `PORT`, variables `DB_*`, `CLIENT_ORIGIN` y `API_PUBLIC_URL`.
 
 ### 24. ¿Cómo sabe React a qué API conectarse en Netlify?
 
@@ -270,17 +274,33 @@ La relación maestro-detalle usa `categorias.id` y `plantillas.categoria_id`. Un
 
 **Comprende.** `from = "/*"`, `to = "/index.html"`, `status = 200` y la ruta comodín de React.
 
+### 29. ¿Por qué el despliegue tiene un package.json independiente?
+
+**Respuesta.** El servicio publicado necesita las dependencias de Express y MySQL. El paquete independiente evita instalar en el hosting las herramientas MongoDB del PA3 y las dependencias del frontend. El código SQL sigue en `server/src/pa4`; el script de build prepara su copia ejecutable.
+
+**Archivo y función.** `deployment/alwaysdata/package.json`; `scripts/build-alwaysdata.mjs`, `collect` y `ts.transpileModule`.
+
+**Comprende.** Las dependencias SQL, la salida `deployment/alwaysdata/server/dist/pa4` y la copia de `server/public`.
+
+### 30. ¿De dónde proceden el diseño, las imágenes y la fuente?
+
+**Respuesta.** Mytask es la referencia visual, sin copiar su código comercial. Las ilustraciones son SVG propios, las fotos proceden de Unsplash y Open Sans se sirve localmente con su licencia. La guía de recursos documenta los orígenes y las convenciones visuales observadas.
+
+**Archivo y función.** `docs/RECURSOS_PA4.md`; `client/src/main.tsx`, importaciones de Open Sans; `client/src/styles/pa4.css`.
+
+**Comprende.** Las licencias, `object-fit: cover`, los colores y radios de los estilos propios.
+
 ## Cómo preparar una demostración breve
 
 1. Abre la carpeta del repositorio en VS Code. En una ventana puedes mostrar `client`; en otra, `server`. También puedes utilizar una ventana con ambas carpetas visibles, siempre que puedas abrir sus archivos rápidamente.
 2. Abre `server/src/pa4/index.ts`, `config/database.ts`, `routes/catalogRoutes.ts`, `controllers/catalogController.ts` y `models/catalogModel.ts`. Recorre una consulta de integrantes sin abrir archivos con contraseñas.
 3. Abre `client/src/pages/TeamPage.tsx`, `TemplatesPage.tsx`, `hooks/useCatalog.ts` y `services/catalog.ts`. Explica la petición y el renderizado de tarjetas.
-4. Entra al panel de AlwaysData con tu cuenta, abre Bases de datos y accede a phpMyAdmin mediante el enlace del panel. Selecciona la base del PA4 y muestra la estructura y los registros de `integrantes`, `categorias` y `plantillas`.
+4. Entra al panel de AlwaysData con tu cuenta, abre Bases de datos y accede a phpMyAdmin mediante el enlace del panel. Selecciona `taskflow4_pa4` y muestra la estructura y los registros de `integrantes`, `categorias` y `plantillas`. La importación verificada contiene cinco tablas en total y un catálogo de seis integrantes, tres categorías y doce plantillas.
 5. En phpMyAdmin muestra `categoria_id` y su relación con `categorias.id`. Abre la pestaña SQL y ejecuta las consultas de `database/checks.sql` para mostrar cantidades, detalles por categoría y claves foráneas. Evita mostrar el contenido de `users` o cualquier archivo de credenciales.
 6. En el sitio publicado abre Nuestro equipo, selecciona una categoría, entra a una plantilla y vuelve a su categoría. Recarga una URL de detalle y abre una ruta inexistente para mostrar la vista 404.
 7. Abre en otra pestaña los endpoints públicos para enseñar el JSON y una imagen. Conserva abiertas las pestañas necesarias antes de empezar la sustentación.
 
-Los enlaces públicos y los resultados deben verificarse antes de la presentación. Esta guía no inventa un dominio de AlwaysData o Netlify ni asegura que una cuenta esté autenticada.
+Los enlaces públicos están verificados en [publicacion.json](evidencias/pa4/publicacion.json) y el recorrido de navegador en [navegador-publico.json](evidencias/pa4/navegador-publico.json). Comprueba su disponibilidad otra vez antes de empezar la presentación.
 
 ## Comandos para comprender y practicar localmente
 
@@ -295,6 +315,25 @@ npm run dev
 `npm run dev` inicia el backend PA4 y Vite. `npm run build` compila ambos proyectos y `npm run typecheck` revisa los tipos. Estos comandos explican el procedimiento y no equivalen a un resultado aprobado; consulta los reportes reales para conocer su última ejecución.
 
 Para importar en AlwaysData, selecciona primero la base autorizada en phpMyAdmin y usa la pestaña Importar con `database/schema.sql` y después `database/seed.sql`. Ejecuta `database/checks.sql` en la pestaña SQL. El esquema no crea ni selecciona una base de nombre fijo, por lo que utiliza la seleccionada en el panel.
+
+## Despliegue preparado para AlwaysData y Netlify
+
+El backend se prepara con su paquete independiente, desde la raíz del repositorio:
+
+```sh
+npm ci --prefix deployment/alwaysdata --include=dev --ignore-scripts
+npm run build --prefix deployment/alwaysdata
+```
+
+El script `scripts/build-alwaysdata.mjs` compila únicamente `server/src/pa4` y copia `server/public`, conservando las rutas relativas utilizadas para el entorno y las imágenes. La entrada ejecutable en el hosting es `/home/taskflow4/taskflow-pa4/deployment/alwaysdata/server/dist/pa4/index.js`. El script `start` del paquete ejecuta esa misma entrada desde su directorio.
+
+`deployment/alwaysdata/configure.mjs` verifica la conexión SQL con TLS y crea el archivo privado `deployment/alwaysdata/server/.env.pa4` sin sobrescribir uno existente. No se publica ese archivo ni se incluye su contraseña en la documentación. El programa recibe `PORT` e `IP` del hosting; no se debe fijar una dirección local en el entorno de producción. En el despliegue final las credenciales se cargan desde el archivo privado; el campo Environnement del sitio sólo contiene `NODE_ENV=production`.
+
+La configuración preparada utiliza la base `taskflow4_pa4` y el origen [taskflow4.alwaysdata.net](https://taskflow4.alwaysdata.net). Se asignan al nuevo servicio las rutas `/api` y `/images`, conservando el sitio PHP existente en el resto del dominio. El catálogo debe comprobarse en `/api/integrantes`, `/api/categorias` y `/api/plantillas`, además de sus categorías, detalles e imágenes.
+
+El proyecto de Netlify creado se llama `taskflow-pa4-gonzofm`. Su variable de build `VITE_API_URL` está configurada como `https://taskflow4.alwaysdata.net/api`; `CLIENT_ORIGIN` del backend debe coincidir con el origen HTTPS real de ese frontend. La configuración de `netlify.toml` genera `client/dist` y permite recargar rutas de React. El sitio público verificado es [TaskFlow](https://taskflow-pa4-gonzofm.netlify.app). La API se consulta en [integrantes](https://taskflow4.alwaysdata.net/api/integrantes).
+
+El detalle de fotografías, ilustraciones, fuente y licencias está en [RECURSOS_PA4.md](RECURSOS_PA4.md). Las seis fuentes académicas del curso se mantienen diferenciadas de los recursos visuales y de la documentación técnica del hosting.
 
 ## Repaso antes de responder
 

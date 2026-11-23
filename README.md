@@ -19,7 +19,7 @@ Facilitar la organización de actividades personales y laborales mediante un esp
 | Base de datos | MySQL/MariaDB, mysql2 y consultas parametrizadas |
 | Autenticación | JWT y bcryptjs |
 | Verificación | Vitest, Supertest y MariaDB real |
-| Publicación prevista | AlwaysData para API y SQL; Netlify para React |
+| Publicación | AlwaysData para API y SQL; Netlify para React |
 
 ## Funcionalidades principales
 
@@ -101,7 +101,7 @@ npm run dev --workspace @taskflow/client
 
 `npm run build` compila ambos workspaces y `npm start` inicia la API compilada. El frontend compilado puede revisarse con `npm run preview --workspace @taskflow/client -- --port 5173`, con Vite de desarrollo detenido.
 
-En AlwaysData, crea la base y su usuario desde el panel, importa los SQL en phpMyAdmin y configura un sitio Node.js con `npm start` desde la raíz del proyecto. Usa el host y puerto del sitio, el origen real de Netlify y la URL HTTPS de la API. No se necesita MongoDB para esta versión.
+En AlwaysData se utiliza el paquete independiente `deployment/alwaysdata`. Instala con `npm ci --prefix deployment/alwaysdata --include=dev --ignore-scripts` y compila con `npm run build --prefix deployment/alwaysdata`. El sitio Node.js ejecuta `server/dist/pa4/index.js` desde ese directorio y recibe `IP` y `PORT` del hosting. Su archivo privado está en `deployment/alwaysdata/server/.env.pa4`. La [guía de sustentación](docs/SUSTENTACION_PA4.md) detalla la configuración.
 
 Netlify usa [netlify.toml](netlify.toml), compila el workspace del cliente y publica `client/dist`. Configura `VITE_API_URL` antes del build. La regla `/* /index.html 200` permite recargar rutas de React Router; las rutas desconocidas muestran la página 404 de TaskFlow.
 
@@ -136,4 +136,5 @@ Las pruebas SQL necesitan una base independiente llamada `taskflow_pa4_test`, co
 - [Requisitos y fuentes del curso](docs/REQUISITOS_PA4.md), [auditoría PA4](docs/AUDITORIA_PA4.md) y [guía de sustentación](docs/SUSTENTACION_PA4.md).
 - [Plantilla Mytask en ThemeForest](https://themeforest.net/item/mytask-react-redux-project-management-admin-template/35386552). La adaptación utiliza recursos propios o permitidos y Open Sans.
 - [Código de TaskFlow PA4](https://github.com/Gonzofm/taskflow-fullstack-pa3/tree/pa4-desarrollo).
-- AlwaysData y Netlify están pendientes de publicación y verificación pública. Sus URLs definitivas deben comprobarse antes de presentar los tres enlaces de entrega.
+- [API pública en AlwaysData](https://taskflow4.alwaysdata.net/api/integrantes) y [TaskFlow en Netlify](https://taskflow-pa4-gonzofm.netlify.app), verificados mediante HTTP y navegador.
+- [Evidencias PA4](docs/evidencias/pa4/README.md), [pruebas y build](docs/evidencias/pa4/verificacion.json) y [comprobación pública](docs/evidencias/pa4/publicacion.json).

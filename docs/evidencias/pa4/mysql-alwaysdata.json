@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-11-23T23:15:34.695Z",
+  "provider": "AlwaysData",
+  "engine": "MariaDB 11.8.9",
+  "database": "taskflow4_pa4",
+  "verification": "Importación schema.sql + seed.sql y lectura de estructura en phpMyAdmin autenticado",
+  "tables": {
+    "integrantes": 6,
+    "categorias": 3,
+    "plantillas": 12,
+    "users": 0,
+    "tasks": 0
+  },
+  "foreignKeyDefinition": "plantillas.categoria_id REFERENCES categorias(id)",
+  "credentialsExcluded": true,
+  "screenshot": "phpmyadmin-tablas.jpg",
+  "foreignKeyVerified": {
+    "source": "Consulta SQL directa con TLS en AlwaysData",
+    "relations": [
+      {
+        "categoria_id": 1,
+        "plantillas": 4
+      },
+      {
+        "categoria_id": 2,
+        "plantillas": 4
+      },
+      {
+        "categoria_id": 3,
+        "plantillas": 4
+      }
+    ],
+    "constraint": "plantillas.categoria_id -> categorias.id",
+    "orphanInsertRejected": true,
+    "transactionRolledBack": true,
+    "screenshot": "sql-remoto-verificado.jpg"
+  }
+}

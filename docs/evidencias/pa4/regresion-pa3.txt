@@ -1,0 +1,25 @@
+Comando: npm run test:pa3
+
+
+> taskflow-pa4@1.0.0 test:pa3
+> npm run test:pa3 --workspace @taskflow/server
+
+
+> @taskflow/server@1.0.0 test:pa3
+> vitest run --config vitest.config.ts
+
+
+ RUN  v3.2.7 <proyecto>/server
+
+ ✓ tests/api.test.ts (18 tests) 6185ms
+   ✓ TaskFlow: integración HTTP + MongoDB real > registra201, normaliza correo, almacena bcrypt y nunca expone el hash  733ms
+   ✓ TaskFlow: integración HTTP + MongoDB real > rechaza correo duplicado normalizado400  376ms
+   ✓ TaskFlow: integración HTTP + MongoDB real > autentica200 y rechaza credenciales erróneas401 con mensaje uniforme  887ms
+   ✓ TaskFlow: integración HTTP + MongoDB real > aísla cuentas: usuario B no lista, consulta, actualiza ni elimina tareas de A  370ms
+   ✓ TaskFlow: integración HTTP + MongoDB real > persiste después de reiniciar el proceso mongod y la aplicación, conservando WiredTiger en disco  1399ms
+   ✓ TaskFlow: integración HTTP + MongoDB real > limita intentos de autenticación429  321ms
+
+ Test Files  1 passed (1)
+      Tests  18 passed (18)
+   Start at  18:16:58
+   Duration  14.34s (transform 350ms, setup 0ms, collect 7.35s, tests 6.18s, environment 0ms, prepare 452ms)

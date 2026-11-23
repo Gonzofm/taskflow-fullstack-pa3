@@ -1,49 +1,10 @@
 {
-  "generatedAt": "2026-11-23T18:33:29.311Z",
-  "scope": "Archivos versionados y nuevos elegibles según git ls-files -c -o --exclude-standard; lectura binaria y comparación exacta con secretos locales, sin exponer sus valores.",
-  "files": 159,
-  "bytes": 1986138,
-  "secretFindings": [],
-  "ignoreChecks": [
-    {
-      "path": "server/.env",
-      "ignored": true
-    },
-    {
-      "path": "server/.env.pa4",
-      "ignored": true
-    },
-    {
-      "path": "client/.env",
-      "ignored": true
-    },
-    {
-      "path": ".local/pa4/ui-account.json",
-      "ignored": true
-    },
-    {
-      "path": "node_modules",
-      "ignored": true
-    },
-    {
-      "path": "server/dist",
-      "ignored": true
-    },
-    {
-      "path": "client/dist",
-      "ignored": true
-    }
-  ],
-  "branch": "pa4-desarrollo",
-  "pa3Main": "40b6872b86d0b0d95975da02151ff04ee202dacf",
-  "limitations": [
-    "El escaneo es una instantánea previa al commit; volver a revisar el índice antes de publicar.",
-    "Los dominios públicos de hosting aún no se han verificado en esta auditoría."
-  ],
-  "commentAuditValidation": {
-    "verifiedAt": "2026-11-23T18:34:17.816Z",
-    "fixtureComments": 6,
-    "detected": 6,
-    "coversJsxEmptyExpressions": true
-  }
+  "generatedAt": "2026-11-23T23:41:31.953Z",
+  "scope": "Archivos Git publicables y evidencias; archivos privados y dependencias excluidos.",
+  "files": 182,
+  "exactSecretsCompared": 5,
+  "findings": [],
+  "brokenLocalLinks": [],
+  "main": "40b6872b86d0b0d95975da02151ff04ee202dacf",
+  "commentAudit": "Incluye JSX; comprobación independiente de seis formatos aprobada."
 }

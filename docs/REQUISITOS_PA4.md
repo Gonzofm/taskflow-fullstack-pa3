@@ -80,6 +80,12 @@ La solicitud del proyecto concreta los mínimos de la evaluación mediante seis 
 
 El esquema conserva adicionalmente usuarios y tareas en SQL para mantener las funciones de productividad en PA4. La versión previa se preserva en `main`; el desarrollo nuevo se realiza en `pa4-desarrollo`.
 
+El despliegue del backend se prepara mediante el paquete independiente `deployment/alwaysdata/`. `scripts/build-alwaysdata.mjs` compila los módulos SQL y copia sus imágenes sin instalar las herramientas MongoDB del PA3 en el servicio publicado. Esta separación pertenece al empaquetado del hosting; las responsabilidades de rutas, controladores y modelos siguen en `server/src/pa4/`.
+
+La nueva aplicación AlwaysData utiliza `/api` y `/images`, conservando el sitio PHP existente del dominio. La base destinada al PA4 es `taskflow4_pa4`. Netlify tiene el proyecto `taskflow-pa4-gonzofm`, con la API de AlwaysData como configuración del frontend. Estos datos describen el despliegue preparado y no sustituyen las comprobaciones públicas pendientes.
+
+Las fuentes visuales, su uso y licencias están documentadas en [RECURSOS_PA4.md](RECURSOS_PA4.md). Esa guía no forma parte del material académico ni acredita por sí sola la ausencia de diferencias visuales; la revisión de diseño debe contrastar la aplicación real con la demo inspeccionada.
+
 ## Rúbrica y penalizaciones
 
 | Criterio | Máximo |

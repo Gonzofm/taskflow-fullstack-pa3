@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-11-23T23:39:49.948Z",
+  "site": "https://taskflow-pa4-gonzofm.netlify.app",
+  "api": "https://taskflow4.alwaysdata.net/api",
+  "result": "PASS",
+  "team": {
+    "cards": 6,
+    "imagesLoaded": 6,
+    "imageOrigin": "https://taskflow4.alwaysdata.net"
+  },
+  "catalog": {
+    "category2": 4,
+    "category3": 4,
+    "detailId": 5,
+    "detailReload": true
+  },
+  "mobile": {
+    "width": 320,
+    "horizontalOverflow": false,
+    "menuWorks": true
+  },
+  "custom404": {
+    "directRoute": true,
+    "reload": true,
+    "returnHome": true
+  },
+  "authentication": {
+    "login": true,
+    "taskCreated": true,
+    "taskDeletedThroughConfirmation": true,
+    "logout": true
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "scope": "Recorrido público de equipo, catálogo, detalle y tareas"
+  },
+  "screenshots": [
+    "equipo-netlify.jpg",
+    "plantillas-netlify.jpg",
+    "detalle-netlify.jpg",
+    "movil-netlify.jpg",
+    "404-netlify.jpg",
+    "tareas-netlify.jpg"
+  ]
+}

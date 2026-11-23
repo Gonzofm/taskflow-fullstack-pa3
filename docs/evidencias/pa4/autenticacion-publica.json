@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-11-23T23:35:38.029Z",
+  "api": "https://taskflow4.alwaysdata.net/api",
+  "origin": "https://taskflow-pa4-gonzofm.netlify.app",
+  "result": "PASS",
+  "checks": [
+    {
+      "path": "/auth/register",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/auth/login",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "path": "/auth/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/tasks",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/tasks/aa6eeacd-78f2-4245-9e09-aab57d739291",
+      "method": "PUT",
+      "status": 200
+    },
+    {
+      "path": "/tasks/aa6eeacd-78f2-4245-9e09-aab57d739291",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/tasks/aa6eeacd-78f2-4245-9e09-aab57d739291",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/tasks/aa6eeacd-78f2-4245-9e09-aab57d739291",
+      "method": "GET",
+      "status": 404
+    }
+  ],
+  "temporaryTaskDeleted": true,
+  "credentialsExcluded": true
+}
