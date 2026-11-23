@@ -1,21 +1,37 @@
 {
-  "name": "taskflow-pa3",
+  "name": "taskflow-pa4",
   "version": "1.0.0",
   "private": true,
-  "description": "TaskFlow — Producto Académico 3 Full-Stack",
+  "description": "TaskFlow — organización personal, equipo y biblioteca de productividad",
   "type": "module",
-  "workspaces": ["client", "server"],
-  "engines": { "node": ">=22.12.0", "npm": ">=10" },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10"
+  },
   "scripts": {
-    "setup": "node scripts/setup.mjs",
+    "setup": "node scripts/setup-pa4.mjs",
     "db:start": "node scripts/mongodb.mjs",
     "db:inspect": "node scripts/inspect-db.mjs",
     "dev": "concurrently --kill-others -n API,WEB -c cyan,magenta \"npm run dev -w @taskflow/server\" \"npm run dev -w @taskflow/client\"",
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces",
     "test": "npm run test -w @taskflow/server",
-    "verify": "node scripts/verify.mjs",
-    "start": "npm run start -w @taskflow/server"
+    "verify": "node scripts/verify-pa4.mjs",
+    "start": "npm run start -w @taskflow/server",
+    "dev:pa3": "concurrently --kill-others -n API,WEB -c cyan,magenta \"npm run dev:pa3 -w @taskflow/server\" \"npm run dev -w @taskflow/client\"",
+    "test:pa3": "npm run test:pa3 --workspace @taskflow/server",
+    "db:import": "node scripts/sql.mjs import",
+    "db:check": "node scripts/sql.mjs inspect",
+    "verify:pa4": "node scripts/verify-pa4.mjs",
+    "setup:pa3": "node scripts/setup.mjs",
+    "sql:import": "node scripts/sql.mjs import",
+    "sql:inspect": "node scripts/sql.mjs inspect",
+    "verify:pa3": "node scripts/verify.mjs",
+    "audit:comments": "node scripts/audit-comments.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

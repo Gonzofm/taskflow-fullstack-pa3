@@ -14,9 +14,6 @@ import { loadConfig, type AppConfig } from '../src/config/env.js';
 import { User } from '../src/models/User.js';
 import { Task } from '../src/models/Task.js';
 import { JWT_AUDIENCE, JWT_ISSUER } from '../src/middlewares/auth.js';
-
-// mongodb-memory-server ejecuta un binario mongod real con WiredTiger.
-// Es una base temporal de pruebas; la aplicación utiliza MONGODB_URI persistente.
 const config: AppConfig = {
   nodeEnv: 'test', port: 4000, mongodbUri: '', clientOrigin: 'http://localhost:5173',
   jwtSecret: 'taskflow-test-only-secret-with-at-least-32-bytes',
@@ -50,7 +47,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await disconnectDatabase();
   if (database) await database.stop({ doCleanup: false, force: false });
-  // Se elimina exclusivamente la carpeta temporal que creó esta suite.
   if (databaseDirectory && dirname(resolve(databaseDirectory)) === resolve(tmpdir()) && basename(databaseDirectory).startsWith('taskflow-api-test-')) {
     await rm(databaseDirectory, { recursive: true, force: true });
   }

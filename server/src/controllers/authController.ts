@@ -49,7 +49,6 @@ export function createAuthController(config: AppConfig): {
     login: async (req, res) => {
       const input = loginSchema.parse(req.body);
       const user = await User.findOne({ email: input.email }).select('+password');
-      // Comparar también si el usuario no existe reduce diferencias de tiempo evidentes.
       const valid = await bcrypt.compare(input.password, user?.password ?? '$2b$12$BEHv5wceXlPrxL5OtOa3RuJbG9vWuHMSUcSmE7nTT4sPjb7f6bltG');
       if (!user || !valid) throw new AppError(401, 'El correo o la contraseña no son correctos.');
       res.status(200).json({ success: true, data: { user: publicUser(user), token: tokenFor(user.id) } });

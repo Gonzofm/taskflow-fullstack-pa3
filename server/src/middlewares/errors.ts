@@ -50,7 +50,6 @@ export const errorHandler: ErrorRequestHandler = (error: unknown, _req, res, nex
     res.status(413).json({ success: false, message: 'La solicitud supera el tamaño permitido.' });
     return;
   }
-  // No imprimir el objeto error: puede contener credenciales, cuerpos o URIs.
   console.error('Error interno de la API.');
   res.status(500).json({ success: false, message: 'Ocurrió un error interno. Inténtalo nuevamente.' });
 };

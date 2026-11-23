@@ -47,7 +47,7 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
 
   return <main className="auth-layout">
     <section className="auth-form-side">
-      <div className="auth-brand"><Brand /><span className="auth-small-label">TU ESPACIO PERSONAL</span></div>
+      <div className="auth-brand"><Link to="/" aria-label="Volver al inicio de TaskFlow"><Brand /></Link><Link className="auth-small-label" to="/equipo">EXPLORAR TASKFLOW ↗</Link></div>
       <div className="auth-form-wrap">
         <span className="eyebrow"><span className="tiny-dot" /> UN DÍA, UN PASO A LA VEZ</span>
         <h1>{isRegister ? <>Las grandes cosas<br />empiezan aquí<span className="accent-text">.</span></> : <>Vuelve a lo<br />que importa<span className="accent-text">.</span></>}</h1>

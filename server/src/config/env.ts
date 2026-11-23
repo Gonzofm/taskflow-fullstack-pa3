@@ -23,7 +23,6 @@ export interface AppConfig {
 export function loadConfig(environment: NodeJS.ProcessEnv = process.env): AppConfig {
   const parsed = envSchema.safeParse(environment);
   if (!parsed.success) {
-    // Se mencionan únicamente los nombres de configuración, nunca sus valores.
     const fields = [...new Set(parsed.error.issues.map((issue) => issue.path.join('.')))];
     throw new Error(`Configuración inválida: ${fields.join(', ')}. Revisa server/.env y .env.example.`);
   }

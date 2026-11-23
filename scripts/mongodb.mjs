@@ -1,4 +1,3 @@
-// Runs an actual local mongod process. WiredTiger keeps application data on disk.
 import { mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';

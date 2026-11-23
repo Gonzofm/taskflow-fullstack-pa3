@@ -6,6 +6,11 @@ import { useAuth } from './context/AuthContext';
 import { AuthPage } from './pages/AuthPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { session } from './services/api';
+import { AppLayout } from './components/AppLayout';
+import { TeamPage } from './pages/TeamPage';
+import { TemplatesPage } from './pages/TemplatesPage';
+import { TemplateDetailPage } from './pages/TemplateDetailPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 function PrivateRoute({ children }: { children: ReactNode }) {
   const { user, loading, authError, retry, logout } = useAuth();
@@ -15,5 +20,5 @@ function PrivateRoute({ children }: { children: ReactNode }) {
 }
 
 export default function App() {
-  return <Routes><Route path="/login" element={<AuthPage key="login" mode="login" />} /><Route path="/register" element={<AuthPage key="register" mode="register" />} /><Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} /><Route path="*" element={<Navigate to="/dashboard" replace />} /></Routes>;
+  return <Routes><Route path="/login" element={<AuthPage key="login" mode="login" />} /><Route path="/register" element={<AuthPage key="register" mode="register" />} /><Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} /><Route element={<AppLayout />}><Route index element={<Navigate to="/equipo" replace />} /><Route path="/equipo" element={<TeamPage />} /><Route path="/plantillas" element={<TemplatesPage />} /><Route path="/plantillas/:id" element={<TemplateDetailPage />} /><Route path="*" element={<NotFoundPage />} /></Route></Routes>;
 }

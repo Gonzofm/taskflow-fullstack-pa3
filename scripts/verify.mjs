@@ -30,7 +30,6 @@ for (const name of ['typecheck', 'build', 'test']) {
     child.on('error', reject);
     child.on('close', (code) => resolve(code ?? 1));
   });
-  // Las evidencias públicas no deben revelar rutas del equipo de desarrollo.
   const clean = output.replace(/\x1b\[[0-9;]*[A-Za-z]/g, '')
     .replaceAll(root.replaceAll('\\', '/').replace(/\/$/, ''), '<proyecto>')
     .replaceAll(root.replace(/\\$/, ''), '<proyecto>')

@@ -13,7 +13,6 @@ export function createApp(config: AppConfig): express.Express {
   app.use(helmet());
   app.use(cors({
     origin: (origin, callback) => {
-      // Las herramientas CLI no envían Origin; CORS protege el acceso desde navegadores.
       if (!origin || origin === config.clientOrigin) callback(null, true);
       else callback(new AppError(403, 'Este origen no está autorizado para acceder a la API.'));
     },

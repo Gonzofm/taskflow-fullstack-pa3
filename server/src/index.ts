@@ -39,7 +39,6 @@ async function main(): Promise<void> {
 }
 
 main().catch((error: unknown) => {
-  // Los mensajes construidos arriba no incluyen credenciales ni la URI de MongoDB.
   console.error(error instanceof Error ? error.message : 'No fue posible iniciar la API.');
   void disconnectDatabase().finally(() => process.exit(1));
 });

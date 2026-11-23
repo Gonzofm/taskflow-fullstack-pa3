@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-11-23T18:35:47.029Z",
+  "environment": "Local PA4, API SQL con MariaDB real",
+  "checks": {
+    "team": {
+      "records": 6,
+      "imagesLoaded": 6,
+      "desktop": true,
+      "mobile390": true
+    },
+    "catalog": {
+      "category2": 4,
+      "category3": 4,
+      "detailId": 5,
+      "detailName": "Plan de proyecto",
+      "categoryPreservedAfterReload": true
+    },
+    "responsive": {
+      "testedWidths": [
+        320,
+        390
+      ],
+      "horizontalOverflow": false
+    },
+    "custom404": {
+      "directInvalidRoute": true,
+      "homeLink": true
+    },
+    "tasks": {
+      "registration": true,
+      "login": true,
+      "create": true,
+      "edit": true,
+      "complete": true,
+      "preservedAfterReload": true,
+      "cancelDeletion": true,
+      "confirmDeletion": true,
+      "logout": true,
+      "privateRouteRedirectsToLogin": true
+    },
+    "browserConsole": {
+      "errors": 0,
+      "warnings": 0,
+      "scope": "Recorrido local de equipo, catálogo y CRUD"
+    }
+  },
+  "screenshots": [
+    "equipo-escritorio.jpg",
+    "plantillas-categoria.jpg",
+    "plantilla-detalle.jpg",
+    "pagina-404.jpg",
+    "plantillas-movil.jpg",
+    "tareas-sql.jpg"
+  ],
+  "publicDeployment": "Pendiente de configuración y comprobación pública"
+}

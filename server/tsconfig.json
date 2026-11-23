@@ -10,7 +10,10 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    "sourceMap": true
+    "sourceMap": false,
+    "removeComments": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

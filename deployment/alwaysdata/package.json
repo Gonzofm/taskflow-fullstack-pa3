@@ -1,0 +1,28 @@
+{
+  "name": "taskflow-pa4-alwaysdata",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "node ../../scripts/build-alwaysdata.mjs",
+    "start": "node server/dist/pa4/index.js",
+    "db:import": "node import-sql.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "3.0.3",
+    "cors": "2.8.6",
+    "dotenv": "17.4.2",
+    "express": "5.3.0",
+    "express-rate-limit": "8.7.2",
+    "helmet": "8.3.0",
+    "jsonwebtoken": "9.0.3",
+    "mysql2": "3.24.6",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

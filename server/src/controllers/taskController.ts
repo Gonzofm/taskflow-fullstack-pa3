@@ -26,7 +26,6 @@ export const listTasks: RequestHandler = async (req, res) => {
 
 export const createTask: RequestHandler = async (req, res) => {
   const input = createSchema.parse(req.body);
-  // El propietario proviene exclusivamente del JWT verificado.
   const task = await Task.create({ ...input, user: req.auth!.userId });
   res.status(201).json({ success: true, data: { task: publicTask(task) } });
 };

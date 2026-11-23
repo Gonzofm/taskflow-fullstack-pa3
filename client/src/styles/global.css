@@ -1,17 +1,18 @@
+@import "tailwindcss";
 :root {
-  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  font-family:"Open Sans","Segoe UI",Arial,sans-serif;
   color:#252533;
   background:#fafaf8;
   font-synthesis:none;
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-  --accent:#5b52e8;
-  --accent-dark:#493fd1;
+  --accent:#484c7f;
+  --accent-dark:#3c406b;
   --muted:#737382;
   --border:#e9e8e4;
   --green:#27815f;
-  --sidebar-width:244px;
+  --sidebar-width:292px;
 }
 * {
   box-sizing:border-box;
@@ -331,7 +332,7 @@ button {
   font-size:11px;
   margin-left:5px;
 }
-/* Entrada: un lugar tranquilo para empezar. */
+
 .auth-layout {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -720,7 +721,7 @@ button {
   color:#b4a6c5;
   letter-spacing:1.7px;
 }
-/* Un espacio personal: navegación serena, acciones claras. */
+
 .dashboard-layout {
   min-height:100vh;
 }
@@ -1850,7 +1851,7 @@ button {
   margin-top:43px;
   border-radius:3px;
 }
-/* Formularios, confirmaciones y feedback. */
+
 .modal-backdrop {
   position:fixed;
   inset:0;
@@ -2057,7 +2058,7 @@ button {
   border-color:#ecd5de;
   color:#bd7f96;
 }
-/* Lectura clara en todos los tamaños de pantalla. */
+
 :root {
   --muted:#6f6879;
 }
@@ -3331,7 +3332,7 @@ button {
     transform:translateY(0);
   }
 }
-/* Tamaños de lectura y contraste consistentes para el trabajo diario. */
+
 .nav-item {
   font-size:12px;
   color:#79727f;

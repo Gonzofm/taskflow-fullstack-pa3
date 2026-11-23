@@ -1,0 +1,10 @@
+SELECT COUNT(*) AS total_integrantes FROM integrantes;
+SELECT COUNT(*) AS columnas_integrantes FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='integrantes';
+SELECT COUNT(*) AS total_categorias FROM categorias;
+SELECT COUNT(*) AS total_plantillas FROM plantillas;
+SELECT c.id,c.nombre,COUNT(p.id) AS total_plantillas FROM categorias c LEFT JOIN plantillas p ON p.categoria_id=c.id GROUP BY c.id,c.nombre ORDER BY c.id;
+SELECT p.id,p.nombre,p.categoria_id,c.nombre AS categoria FROM plantillas p INNER JOIN categorias c ON c.id=p.categoria_id ORDER BY c.id,p.id;
+SELECT p.id FROM plantillas p LEFT JOIN categorias c ON c.id=p.categoria_id WHERE c.id IS NULL;
+SELECT table_name,column_name,referenced_table_name,referenced_column_name FROM information_schema.key_column_usage WHERE constraint_schema=DATABASE() AND referenced_table_name IS NOT NULL;
+SELECT id,imagen FROM integrantes WHERE imagen IS NULL OR imagen='';
+SELECT id,imagen FROM plantillas WHERE imagen IS NULL OR imagen='';

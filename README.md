@@ -2,138 +2,138 @@
 
 ## Descripción de TaskFlow
 
-TaskFlow es una aplicación web para gestionar tareas personales. Cada cuenta tiene un panel privado desde el que puede consultar y actualizar sus tareas. La interfaz en React consume una API REST en Express, y los usuarios y las tareas se guardan en MongoDB.
+TaskFlow reúne tareas personales, perfiles de un equipo y una biblioteca de plantillas de productividad. React consume una API REST en Express y los datos de esta versión se guardan en MySQL/MariaDB.
+
+El desarrollo actual está en [`pa4-desarrollo`](https://github.com/Gonzofm/taskflow-fullstack-pa3/tree/pa4-desarrollo). La versión anterior con MongoDB permanece en [`main`, commit `40b6872`](https://github.com/Gonzofm/taskflow-fullstack-pa3/tree/40b6872); su código y scripts se conservan.
 
 ## Objetivo de la aplicación
 
-TaskFlow reúne las tareas personales en un solo lugar. Permite ordenar el trabajo por prioridad y distinguir lo pendiente de lo completado, de modo que cada usuario pueda decidir qué hacer a continuación y seguir su progreso desde un espacio privado.
+Facilitar la organización de actividades personales y laborales mediante un espacio que permita administrar tareas, establecer prioridades y consultar recursos de productividad. TaskFlow ayuda a convertir objetivos en acciones concretas y a seguir el avance de lo pendiente y lo completado.
 
 ## Tecnologías utilizadas
 
 | Capa | Tecnologías |
 | --- | --- |
-| Frontend | React, TypeScript, Vite, React Router y CSS |
+| Frontend | React, TypeScript, Vite, React Router y Tailwind CSS |
 | Backend | Node.js, Express y TypeScript |
-| Base de datos | MongoDB y Mongoose |
+| Base de datos | MySQL/MariaDB, mysql2 y consultas parametrizadas |
 | Autenticación | JWT y bcryptjs |
-| Pruebas de integración | Vitest y Supertest |
+| Verificación | Vitest, Supertest y MariaDB real |
+| Publicación prevista | AlwaysData para API y SQL; Netlify para React |
 
 ## Funcionalidades principales
 
-- Registro, inicio y cierre de sesión.
-- Creación, edición y eliminación de tareas con confirmación de borrado.
-- Prioridades baja, media y alta, y cambio de estado entre pendiente y completada.
-- Búsqueda, filtros, ordenamiento e indicadores de progreso en el panel.
+- Registro, inicio y cierre de sesión, con tareas privadas por usuario.
+- Creación, edición, eliminación, prioridades, filtros y seguimiento de tareas.
+- Nuestro equipo, con seis perfiles e imágenes cargados desde la API.
+- Biblioteca con tres categorías, doce plantillas y cuatro recursos por categoría.
+- Selección de categoría, búsqueda, detalle de plantilla y página 404 propia.
 
-Al registrarse, el servidor guarda un hash de la contraseña con bcrypt. En el inicio de sesión, compara la contraseña ingresada con ese hash. El cliente guarda el JWT firmado en `sessionStorage` y lo elimina al cerrar sesión. La API comprueba la firma y la caducidad del token y limita el acceso a las tareas del usuario autenticado.
+bcrypt guarda y compara hashes de contraseñas. JWT identifica la sesión mediante un token firmado con caducidad; la API lo valida y comprueba el propietario de cada tarea. El navegador lo conserva en `sessionStorage` hasta cerrar la sesión.
 
 ## Estructura del proyecto
 
 | Carpeta | Contenido |
 | --- | --- |
-| `client/` | Interfaz y consumo de la API |
-| `server/` | Rutas, controladores, modelos y pruebas |
-| `scripts/` | Configuración inicial, MongoDB local y verificación |
-| `docs/evidencias/` | Capturas y resultados de pruebas |
+| `client/src/` | Páginas, componentes, contextos y consumo de API |
+| `server/src/pa4/` | Configuración SQL, modelos, controladores, rutas y middleware |
+| `server/src/` | Implementación MongoDB conservada del PA3 |
+| `server/public/images/` | Fotografías y vistas de plantillas |
+| `database/` | `schema.sql`, `seed.sql` y `checks.sql` |
+| `scripts/` | Configuración, importación SQL y verificación |
+| `docs/` | Requisitos, auditoría, evidencias y sustentación |
 
 ## Requisitos e instalación
 
-Necesitas Node.js 22.12 o superior, npm 10 o superior, Git y conexión a Internet para instalar las dependencias. Para la base de datos puedes usar el lanzador local incluido, un servicio MongoDB instalado o un clúster de Atlas.
+Necesitas Node.js 22.12 o superior, npm 10 o superior, Git y un servidor MySQL/MariaDB. La instalación local se ha preparado con MariaDB; el servidor debe estar iniciado antes de importar los datos.
 
 ```bash
-git clone https://github.com/Gonzofm/taskflow-fullstack-pa3.git
+git clone --branch pa4-desarrollo https://github.com/Gonzofm/taskflow-fullstack-pa3.git
 cd taskflow-fullstack-pa3
 npm install
 npm run setup
 ```
 
-`npm install` instala las dependencias de ambos workspaces. `npm run setup` crea los archivos `.env` a partir de [server/.env.example](server/.env.example) y [client/.env.example](client/.env.example), y genera un secreto JWT para el servidor. Si los archivos ya existen, el script los conserva.
+El setup crea `server/.env.pa4` y `client/.env` desde [server/.env.pa4.example](server/.env.pa4.example) y [client/.env.example](client/.env.example), genera un secreto JWT y conserva los archivos existentes. Completa las credenciales SQL antes de continuar. Los archivos privados están excluidos de Git.
 
-## Configuración de MongoDB y variables de entorno
+## Configuración de MySQL/MariaDB y variables de entorno
 
-### MongoDB local
-
-Desde la raíz del repositorio, inicia el lanzador en una terminal y espera a que MongoDB esté listo.
+Crea una base `taskflow_pa4` con codificación `utf8mb4` y un usuario con permisos sobre esa base. Configura su conexión en `server/.env.pa4`. El ejemplo usa el puerto `3307`; ajusta `DB_PORT` al puerto real de tu instalación, habitualmente `3306`.
 
 ```bash
-npm run db:start
+npm run sql:import
+npm run sql:inspect
 ```
 
-El lanzador descarga el binario de MongoDB si hace falta y guarda los datos en `.local/mongodb`. Mantén la terminal abierta mientras usas TaskFlow. Si ya tienes MongoDB instalado, inicia ese servicio y usa su URI en `server/.env` en lugar del lanzador.
+La importación ejecuta [schema.sql](database/schema.sql) y [seed.sql](database/seed.sql). También puedes seleccionar la base en phpMyAdmin e importar ambos archivos, en ese orden. No incluyen `CREATE DATABASE`, `USE` ni borrado de tablas. Las consultas de [checks.sql](database/checks.sql) comprueban los registros y las relaciones.
 
-### MongoDB Atlas
+`plantillas.categoria_id` referencia `categorias.id` mediante una clave foránea. Las tablas adicionales `users` y `tasks` mantienen las cuentas y tareas privadas. Las imágenes se guardan como rutas; Express sirve los archivos correspondientes.
 
-Crea un clúster y un usuario de base de datos con permisos sobre `taskflow`. Autoriza la IP del backend en **Network Access** y configura `MONGODB_URI` en `server/.env` con la cadena que aparece en **Connect → Drivers**. Sustituye los valores del ejemplo y codifica los caracteres especiales de la contraseña para que sean válidos en la URI.
-
-```dotenv
-MONGODB_URI=mongodb+srv://USUARIO:CONTRASENA_CODIFICADA@CLUSTER.mongodb.net/taskflow?retryWrites=true&w=majority
-```
-
-Con Atlas, continúa directamente con `npm run dev` una vez configurada la conexión.
-
-### Variables de entorno
-
-| Archivo | Variable | Valor local o uso |
+| Archivo | Variable | Configuración |
 | --- | --- | --- |
-| `server/.env` | `NODE_ENV` | `development` |
-| `server/.env` | `PORT` | `4000` |
-| `server/.env` | `MONGODB_URI` | `mongodb://127.0.0.1:27017/taskflow` o la URI de Atlas |
-| `server/.env` | `JWT_SECRET` | Secreto privado de al menos 32 bytes generado por `npm run setup` |
-| `server/.env` | `JWT_EXPIRES_IN_SECONDS` | `3600` (una hora) |
-| `server/.env` | `AUTH_RATE_LIMIT_MAX` | `20` intentos de autenticación por cada 15 minutos |
-| `server/.env` | `CLIENT_ORIGIN` | `http://localhost:5173`, sin barra final |
-| `client/.env` | `VITE_API_URL` | `http://localhost:4000/api` |
+| `server/.env.pa4` | `NODE_ENV` | `development` local; `production` en hosting |
+| `server/.env.pa4` | `HOST`, `PORT` | `127.0.0.1`, `4000` local; valores asignados por AlwaysData |
+| `server/.env.pa4` | `DB_HOST`, `DB_PORT` | Dirección y puerto de MySQL/MariaDB |
+| `server/.env.pa4` | `DB_USER`, `DB_PASSWORD`, `DB_NAME` | Usuario, contraseña y base SQL |
+| `server/.env.pa4` | `DB_SSL` | `false` local; `true` si el servidor exige TLS |
+| `server/.env.pa4` | `CLIENT_ORIGIN` | Origen exacto del frontend, `http://localhost:5173` local |
+| `server/.env.pa4` | `API_PUBLIC_URL` | Origen de la API, `http://localhost:4000` local |
+| `server/.env.pa4` | `JWT_SECRET` | Secreto privado de al menos 32 bytes generado por el setup |
+| `server/.env.pa4` | `JWT_EXPIRES_IN_SECONDS`, `AUTH_RATE_LIMIT_MAX` | `3600` y `20` en el ejemplo |
+| `client/.env` | `VITE_API_URL` | `http://localhost:4000/api` local; API HTTPS de AlwaysData seguida de `/api` en Netlify |
 
-Guarda la URI y el secreto JWT en el servidor. Los archivos `.env` están excluidos de Git. Si cambias los puertos, actualiza `VITE_API_URL` y `CLIENT_ORIGIN` según corresponda y reinicia ambos servicios.
+Los orígenes no llevan ruta ni barra final. Reinicia los servicios después de cambiar variables; las variables `VITE_` se incorporan al build y son públicas. Las credenciales SQL y el secreto JWT pertenecen exclusivamente al servidor.
 
 ## Ejecución de la aplicación
 
-Con MongoDB disponible, abre otra terminal en la raíz y ejecuta ambos servicios.
+Con SQL configurado e importado, inicia ambos servicios desde la raíz.
 
 ```bash
 npm run dev
 ```
 
-Abre el [frontend](http://localhost:5173) en el navegador. Puedes comprobar la conexión de la API con MongoDB en [`/api/health`](http://localhost:4000/api/health).
-
-Para levantar cada servicio por separado, ejecuta un comando por terminal desde la raíz.
+Abre [TaskFlow](http://localhost:5173) y comprueba la conexión en [`/api/health`](http://localhost:4000/api/health). Para ejecutar los servicios por separado, usa una terminal por comando.
 
 ```bash
 npm run dev --workspace @taskflow/server
 npm run dev --workspace @taskflow/client
 ```
 
-`npm run build` compila ambos workspaces. Con MongoDB disponible, `npm run start` inicia la API compilada. Para revisar el frontend compilado con la API activa, usa `npm run preview --workspace @taskflow/client -- --port 5173` con el frontend de desarrollo detenido.
+`npm run build` compila ambos workspaces y `npm start` inicia la API compilada. El frontend compilado puede revisarse con `npm run preview --workspace @taskflow/client -- --port 5173`, con Vite de desarrollo detenido.
+
+En AlwaysData, crea la base y su usuario desde el panel, importa los SQL en phpMyAdmin y configura un sitio Node.js con `npm start` desde la raíz del proyecto. Usa el host y puerto del sitio, el origen real de Netlify y la URL HTTPS de la API. No se necesita MongoDB para esta versión.
+
+Netlify usa [netlify.toml](netlify.toml), compila el workspace del cliente y publica `client/dist`. Configura `VITE_API_URL` antes del build. La regla `/* /index.html 200` permite recargar rutas de React Router; las rutas desconocidas muestran la página 404 de TaskFlow.
 
 ## API REST y pruebas
 
-La URL base es `http://localhost:4000/api`. Las rutas protegidas reciben el encabezado `Authorization: Bearer <token>`.
+La base local es `http://localhost:4000/api`. Las rutas privadas reciben `Authorization: Bearer <token>`.
 
-| Método | Ruta | JWT | Operación |
-| --- | --- | --- | --- |
-| GET | `/health` | No | Comprueba el estado de la API y de MongoDB |
-| POST | `/auth/register` | No | Registra al usuario y devuelve un token |
-| POST | `/auth/login` | No | Inicia sesión y devuelve un token |
-| GET | `/auth/me` | Sí | Consulta el perfil de la sesión |
-| GET | `/tasks` | Sí | Lista las tareas propias |
-| POST | `/tasks` | Sí | Crea una tarea propia |
-| GET | `/tasks/:id` | Sí | Consulta una tarea propia |
-| PUT | `/tasks/:id` | Sí | Actualiza una tarea propia |
-| DELETE | `/tasks/:id` | Sí | Elimina una tarea propia |
-
-El registro recibe `name`, `email` y `password`. Las tareas usan `title`, `description`, `priority` y `status`, y su propietario se identifica a partir del token.
+| Método | Ruta | Operación |
+| --- | --- | --- |
+| GET | `/health` | Estado de API y conexión SQL |
+| GET | `/integrantes` | Perfiles del equipo con imágenes |
+| GET | `/categorias` | Categorías y número de plantillas |
+| GET | `/plantillas` | Catálogo completo |
+| GET | `/plantillas/categoria/:id` | Plantillas de una categoría |
+| GET | `/plantillas/:id` | Detalle de una plantilla |
+| POST | `/auth/register`, `/auth/login` | Registro e inicio de sesión |
+| GET | `/auth/me` | Perfil autenticado |
+| GET, POST | `/tasks` | Consultar y crear tareas propias |
+| GET, PUT, DELETE | `/tasks/:id` | Consultar, actualizar y eliminar una tarea propia |
 
 ```bash
 npm run typecheck
 npm run build
 npm test
+npm run audit:comments
 ```
 
-Las pruebas de integración usan una instancia temporal de MongoDB y cubren autenticación, gestión de tareas y aislamiento entre cuentas. `npm run verify` ejecuta las tres comprobaciones y guarda sus resultados en `docs/evidencias/`.
+Las pruebas SQL necesitan una base independiente llamada `taskflow_pa4_test`, con permisos para el mismo usuario. Puedes definir `DB_TEST_NAME` con otro nombre terminado en `_test`. La suite importa sus tablas y datos; no utiliza la base de la aplicación. `npm run verify` reúne las comprobaciones y guarda sus resultados en `docs/evidencias/pa4/`.
 
 ## Evidencias y repositorio
 
-- [Captura del panel de tareas](docs/evidencias/05-tareas-guardadas.jpg)
-- [Guía de evidencias y capturas](docs/evidencias/README.md)
-- [Resultados de las pruebas de integración](docs/evidencias/test.txt)
-- [Repositorio público de TaskFlow en GitHub](https://github.com/Gonzofm/taskflow-fullstack-pa3)
+- [Requisitos y fuentes del curso](docs/REQUISITOS_PA4.md), [auditoría PA4](docs/AUDITORIA_PA4.md) y [guía de sustentación](docs/SUSTENTACION_PA4.md).
+- [Plantilla Mytask en ThemeForest](https://themeforest.net/item/mytask-react-redux-project-management-admin-template/35386552). La adaptación utiliza recursos propios o permitidos y Open Sans.
+- [Código de TaskFlow PA4](https://github.com/Gonzofm/taskflow-fullstack-pa3/tree/pa4-desarrollo).
+- AlwaysData y Netlify están pendientes de publicación y verificación pública. Sus URLs definitivas deben comprobarse antes de presentar los tres enlaces de entrega.

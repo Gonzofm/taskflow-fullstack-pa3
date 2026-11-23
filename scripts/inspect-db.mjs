@@ -1,4 +1,3 @@
-// Read-only view for academic evidence. Never print password hashes or tokens.
 import { fileURLToPath } from 'node:url';
 import { config } from 'dotenv';
 import mongoose from 'mongoose';

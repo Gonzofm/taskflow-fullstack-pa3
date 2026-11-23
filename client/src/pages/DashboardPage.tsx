@@ -1,7 +1,7 @@
-import { ArrowDownUp, ArrowRight, Check, CheckCheck, ChevronRight, Circle, CircleCheck, CircleDashed, ClipboardList, LayoutGrid, LockKeyhole, LogOut, Plus, Search, ShieldCheck, SlidersHorizontal, Sparkles, X } from 'lucide-react';
+import { ArrowDownUp, ArrowRight, Check, CheckCheck, ChevronRight, Circle, CircleDashed, ClipboardList, LockKeyhole, Plus, Search, SlidersHorizontal, X } from 'lucide-react';
 import { useMemo, useState, type CSSProperties } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Brand } from '../components/Brand';
+import { SiteSidebar } from '../components/SiteSidebar';
 import { DeleteTaskModal } from '../components/DeleteTaskModal';
 import { Spinner } from '../components/Spinner';
 import { TaskCard } from '../components/TaskCard';
@@ -15,8 +15,7 @@ import type { Priority, Task, TaskFilter, TaskInput } from '../types';
 const filterLabels = { all: 'Todas las tareas', pending: 'Pendientes', completed: 'Completadas' };
 
 export function DashboardPage() {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
   const notify = useToast();
   const { tasks, loading, error, reload, create, update, remove } = useTasks();
   const [filter, setFilter] = useState<TaskFilter>('all');
@@ -44,7 +43,6 @@ export function DashboardPage() {
   }, [tasks, filter, query, priority, sort]);
 
   function clearFilters() { setFilter('all'); setQuery(''); setPriority('all'); }
-  function signOut() { logout(); notify('Sesión cerrada. ¡Hasta pronto!'); navigate('/login', { replace: true }); }
   async function saveTask(input: TaskInput) {
     if (taskForm && taskForm !== 'new') { await update(taskForm.id, input); notify('Cambios guardados. Todo en orden.'); }
     else { await create(input); clearFilters(); notify('Tarea creada. ¡Ya tienes tu siguiente paso!'); }
@@ -60,12 +58,7 @@ export function DashboardPage() {
 
   return <div className="dashboard-layout">
     <a href="#main-content" className="skip-link">Ir a mis tareas</a>
-    <aside className="sidebar">
-      <div className="sidebar-top"><Brand /><span className="workspace-label"><span className="workspace-avatar">P</span> Espacio personal <span className="workspace-tag">TÚ</span></span></div>
-      <div className="sidebar-navigation"><span className="nav-caption">MI ORGANIZACIÓN</span><nav aria-label="Navegación de tareas">{(['all', 'pending', 'completed'] as const).map((value) => <button key={value} className={`nav-item ${filter === value ? 'active' : ''}`} onClick={() => setFilter(value)} aria-current={filter === value ? 'page' : undefined}>{value === 'all' ? <LayoutGrid size={18} /> : value === 'pending' ? <CircleDashed size={18} /> : <CircleCheck size={18} />}<span>{value === 'all' ? <><span className="nav-desktop-label">Todas las tareas</span><span className="nav-mobile-label">Todas</span></> : filterLabels[value]}</span><span className="nav-count">{counts[value]}</span></button>)}</nav></div>
-      <div className="sidebar-bottom"><div className="focus-note"><span className="note-spark"><Sparkles size={19} /></span><h3>Cada paso cuenta.</h3><p>No tienes que hacerlo todo hoy. Solo empieza por algo.</p><span className="note-line" /></div><div className="private-note"><ShieldCheck size={15} /><span>Solo tú puedes ver tus tareas</span></div><div className="sidebar-profile"><span className="avatar">{user?.name.charAt(0).toLocaleUpperCase('es')}</span><div><strong>{user?.name}</strong><span title={user?.email}>{user?.email}</span></div><button className="icon-button" onClick={signOut} aria-label="Cerrar sesión" title="Cerrar sesión"><LogOut size={17} /></button></div></div>
-      <button className="mobile-logout icon-button" onClick={signOut} aria-label="Cerrar sesión"><LogOut size={18} /></button>
-    </aside>
+    <SiteSidebar />
     <div className="workspace-main">
       <header className="workspace-topbar"><div className="breadcrumb">Espacio personal<ChevronRight size={14} /><strong>Mis tareas</strong></div><div className="topbar-right"><span className="topbar-date">{today}</span><span className="topbar-divider" /><span className="private-badge"><LockKeyhole size={12} />Privado</span></div></header>
       <main className="dashboard-content" id="main-content">
