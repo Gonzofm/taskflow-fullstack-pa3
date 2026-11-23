@@ -1,6 +1,7 @@
 import type { ApiErrorResponse, AuthResponse, Task, TaskInput, User } from '../types';
 
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:4000/api').replace(/\/$/, '');
+const API_URL = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:4000/api' : '')).replace(/\/$/, '');
+if (!API_URL) throw new Error('Configura VITE_API_URL antes de compilar TaskFlow.');
 const TOKEN_KEY = 'taskflow_token';
 
 export const session = {

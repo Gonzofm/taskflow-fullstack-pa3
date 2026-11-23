@@ -1,5 +1,5 @@
 Comando: npm run test
-Fecha UTC: 2026-11-23T18:28:34.910Z
+Fecha UTC: 2026-11-23T23:45:50.670Z
 Node: v22.22.2
 
 
@@ -13,12 +13,13 @@ Node: v22.22.2
 
  RUN  v3.2.7 <proyecto>/server
 
- ✓ tests/pa4.test.ts (18 tests) 2895ms
-   ✓ TaskFlow PA4: integración HTTP y MariaDB real > registra con bcrypt y devuelve usuario público y JWT  741ms
-   ✓ TaskFlow PA4: integración HTTP y MariaDB real > valida registro y detecta correo duplicado  385ms
-   ✓ TaskFlow PA4: integración HTTP y MariaDB real > inicia sesión, recupera la cuenta y rechaza credenciales inválidas  976ms
+ ✓ tests/pa4.test.ts (18 tests) 2834ms
+   ✓ TaskFlow PA4: integración HTTP y MariaDB real > registra con bcrypt y devuelve usuario público y JWT  649ms
+   ✓ TaskFlow PA4: integración HTTP y MariaDB real > valida registro y detecta correo duplicado  369ms
+   ✓ TaskFlow PA4: integración HTTP y MariaDB real > inicia sesión, recupera la cuenta y rechaza credenciales inválidas  939ms
+   ✓ TaskFlow PA4: integración HTTP y MariaDB real > aísla las tareas entre dos cuentas en GET, PUT y DELETE  360ms
 
  Test Files  1 passed (1)
       Tests  18 passed (18)
-   Start at  13:29:00
-   Duration  4.50s (transform 179ms, setup 0ms, collect 1.16s, tests 2.89s, environment 0ms, prepare 177ms)
+   Start at  18:46:17
+   Duration  4.60s (transform 165ms, setup 0ms, collect 1.36s, tests 2.83s, environment 0ms, prepare 154ms)

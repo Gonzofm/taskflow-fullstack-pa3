@@ -1,7 +1,8 @@
 import type { Categoria, Integrante, Plantilla } from '../types/catalog';
 
 const configuredUrl = import.meta.env.VITE_API_URL?.trim();
-export const apiBaseUrl = (configuredUrl || 'http://localhost:4000/api').replace(/\/$/, '');
+export const apiBaseUrl = (configuredUrl || (import.meta.env.DEV ? 'http://localhost:4000/api' : '')).replace(/\/$/, '');
+if (!apiBaseUrl) throw new Error('Configura VITE_API_URL antes de compilar TaskFlow.');
 
 export class CatalogError extends Error {
   constructor(message: string, public readonly status: number) { super(message); }

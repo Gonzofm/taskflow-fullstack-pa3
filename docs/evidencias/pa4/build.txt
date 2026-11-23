@@ -1,5 +1,5 @@
 Comando: npm run build
-Fecha UTC: 2026-11-23T18:28:34.910Z
+Fecha UTC: 2026-11-23T23:45:50.670Z
 Node: v22.22.2
 
 
@@ -22,9 +22,9 @@ dist/assets/open-sans-latin-400-normal-DKniycaP.woff    17.25 kB
 dist/assets/open-sans-latin-700-normal-CceUhp2e.woff2   18.20 kB
 dist/assets/open-sans-latin-600-normal-Cp4N6AwT.woff2   18.62 kB
 dist/assets/open-sans-latin-400-normal-Bk63H6sG.woff2   18.64 kB
-dist/assets/index-B1ETbUC_.css                          80.22 kB │ gzip: 16.67 kB
-dist/assets/index-BufRvpW_.js                          316.15 kB │ gzip: 99.11 kB
-✓ built in 5.11s
+dist/assets/index-C7e_k-xV.css                          80.50 kB │ gzip: 16.73 kB
+dist/assets/index-CdekoHmB.js                          316.28 kB │ gzip: 99.18 kB
+✓ built in 4.37s
 
 > @taskflow/server@1.0.0 build
 > tsc
